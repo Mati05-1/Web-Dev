@@ -4,6 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mi CV — Matias Arroyo</title>
+
+  <!-- Favicon en la pestaña (imagen retro gaming) -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,PUT_AQUI_BASE64_RETRO_GAMING">
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,6 +17,18 @@
       max-width: 400px;
       display: block;
       margin-top: 20px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
@@ -48,8 +64,22 @@
     <li>Organización</li>
   </ul>
 
-  <!-- Imagen agregada -->
-  <img src="1ee8d3cd-91c5-44b3-a151-174a554385bf.png" alt="Deportes">
+  <!-- Imagen de deportes incrustada en Base64 -->
+  <img src="data:image/png;base64,PUT_AQUI_BASE64_DEPORTES" alt="Deportes">
+
+  <!-- Botón para descargar la página -->
+  <button onclick="descargarHTML()">Descargar esta página</button>
+
+  <script>
+    function descargarHTML() {
+      const contenido = document.documentElement.outerHTML;
+      const blob = new Blob([contenido], { type: "text/html" });
+      const enlace = document.createElement("a");
+      enlace.href = URL.createObjectURL(blob);
+      enlace.download = "mi_cv.html";
+      enlace.click();
+    }
+  </script>
 </body>
 </html>
 
