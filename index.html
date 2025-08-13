@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Development</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi CV — Matias Arroyo</title>
+  
+  <link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8pwEHCAgIhgYcJRYmJh4nKisqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKj4pKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKj//AABEIAWgB4AMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAACAwABBf/EABkQAQEBAQEBAAAAAAAAAAAAAAABEQIxUf/EABYBAQEBAAAAAAAAAAAAAAAAAAECA//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAwDAQACEQMRAD8AzgA...MUoYBpBHYZB3xvnvwWNnXb6Zr6VXaXzbiVKSh9uYP4BuL0OuyVE9d3h1ba4aX19H9V5HDKc9A4Z7fq4htcYxltS9+PVxA1wQcq5kkOvZt3vxnjnM8cD1//2Q==">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    img {
+      max-width: 400px;
+      display: block;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bienvenidos a mi página Web</h1>
-    <h2>Hola mundo</h2>
+  <h1>Matias Arroyo</h1>
+
+  <p><a href="mailto:matiasarroyo@gmail.com">matiasarroyo@gmail.com</a></p>
+  <p><a href="https://github.com/Mati05-1" target="_blank">Mi GitHub</a></p>
+  <p><a href="https://linkedin.com/in/tu-usuario" target="_blank">Mi LinkedIn</a></p>
+
+  <h2>Tecnologías</h2>
+  <ul>
+    <li>Git</li>
+    <li>GitHub</li>
+    <li>Unity</li>
+    <li>Flask</li>
+    <li>Flutter</li>
+  </ul>
+
+  <h2>Lenguajes de Programación</h2>
+  <ul>
+    <li>Python</li>
+    <li>Java (básico)</li>
+    <li>C# (básico)</li>
+  </ul>
+
+  <h2>Soft Skills</h2>
+  <ul>
+    <li>Comunicación</li>
+    <li>Adaptabilidad</li>
+    <li>Buena gestión del tiempo</li>
+    <li>Trabajo en equipo</li>
+    <li>Organización</li>
+  </ul>
+  
+  <img src="FotoDeportes.jpg" alt="Deportes">
+
+  <button onclick="descargarHTML()">Descargar esta página</button>
+
+  <script>
+    function descargarHTML() {
+      const contenido = document.documentElement.outerHTML;
+      const blob = new Blob([contenido], { type: "text/html" });
+      const enlace = document.createElement("a");
+      enlace.href = URL.createObjectURL(blob);
+      enlace.download = "mi_cv.html";
+      enlace.click();
+    }
+  </script>
 </body>
 </html>
+
