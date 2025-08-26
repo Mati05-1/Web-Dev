@@ -30,7 +30,7 @@ body {
   border-radius: calc(var(--radius) + 4px);
   padding: 12px;
   box-shadow: 0 6px 20px rgba(2,6,23,0.6);
-  flex-wrap: wrap; /* Para mobile */
+  flex-wrap: wrap; 
 }
 .brand h1{ margin-bottom: 4px; }
 .brand .email a{ font-size: 14px; color: var(--muted); }
@@ -111,4 +111,9 @@ button:hover { transform: translateY(-2px); transition: .18s ease; }
   section, .sidebar { font-size: 1.05rem; }
 }
 
-
+@media screen and (min-width: 1440px) {
+  .layout { grid-template-columns: 3fr 1fr; }
+  .cards { grid-template-columns: 1fr 1fr 1fr; }
+  .site-header { justify-content: space-between; }
+  section, .sidebar { font-size: 1.15rem; padding: 20px; }
+}
