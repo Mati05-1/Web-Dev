@@ -4,132 +4,110 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mi CV — Matias Arroyo</title>
+  <link rel="stylesheet" href="style.css">
   
   <link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    img {
-      max-width: 400px;
-      display: block;
-      margin-top: 20px;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-    th {
-      background-color: #f2f2f2;
-      text-align: left;
-    }
-    caption {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-  </style>
 </head>
 <body>
-  <h1>Matias Arroyo</h1>
+  <header class="site-header">
+    <div class="brand">
+      <h1>Matias Arroyo</h1>
+      <p class="email"><a href="mailto:matiasarroyo@gmail.com">matiasarroyo@gmail.com</a></p>
+    </div>
+    <nav class="main-nav">
+      <a href="#tecnologias">Tecnologías</a>
+      <a href="#lenguajes">Lenguajes</a>
+      <a href="#softskills">Soft Skills</a>
+      <a href="#educacion">Educación</a>
+      <a href="#experiencia">Experiencia</a>
+    </nav>
+  </header>
 
-  <p><a href="mailto:matiasarroyo@gmail.com">matiasarroyo@gmail.com</a></p>
-  <p><a href="https://github.com/Mati05-1" target="_blank">Mi GitHub</a></p>
-  <p><a href="https://linkedin.com/in/tu-usuario" target="_blank">Mi LinkedIn</a></p>
+  <main class="layout">
+    <aside class="sidebar">
+      <h2 id="tecnologias">Tecnologías</h2>
+      <ul>
+        <li>Git</li>
+        <li>GitHub</li>
+        <li>Unity</li>
+        <li>Flask</li>
+        <li>Flutter</li>
+      </ul>
 
-  <h2>Tecnologías</h2>
-  <ul>
-    <li>Git</li>
-    <li>GitHub</li>
-    <li>Unity</li>
-    <li>Flask</li>
-    <li>Flutter</li>
-  </ul>
+      <h2 id="lenguajes">Lenguajes</h2>
+      <ul>
+        <li>Python</li>
+        <li>Java (básico)</li>
+        <li>C# (básico)</li>
+      </ul>
 
-  <h2>Lenguajes de Programación</h2>
-  <ul>
-    <li>Python</li>
-    <li>Java (básico)</li>
-    <li>C# (básico)</li>
-  </ul>
+      <h2 id="softskills">Soft Skills</h2>
+      <ul>
+        <li>Comunicación</li>
+        <li>Adaptabilidad</li>
+        <li>Buena gestión del tiempo</li>
+        <li>Trabajo en equipo</li>
+        <li>Organización</li>
+      </ul>
+    </aside>
 
-  <h2>Soft Skills</h2>
-  <ul>
-    <li>Comunicación</li>
-    <li>Adaptabilidad</li>
-    <li>Buena gestión del tiempo</li>
-    <li>Trabajo en equipo</li>
-    <li>Organización</li>
-  </ul>
-  
-  <section id="educacion">
-    <h2>Educación</h2>
-    <table>
-      <caption>Historial Académico</caption>
-      <thead>
-        <tr>
-          <th scope="col">Año</th>
-          <th scope="col">Institución</th>
-          <th scope="col">Título obtenido</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2024 - 2027</td>
-          <td>Universidad Francisco Marroquín</td>
-          <td>Computer Science</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <section class="cards">
+      <div class="card" id="educacion">
+        <h2>Educación</h2>
+        <table>
+          <caption>Historial Académico</caption>
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Institución</th>
+              <th>Título</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024 - 2027</td>
+              <td>Universidad Francisco Marroquín</td>
+              <td>Computer Science</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <section id="experiencia">
-    <h2>Experiencia Laboral</h2>
-    <table>
-      <caption>Historial de Experiencia Laboral</caption>
-      <thead>
-        <tr>
-          <th scope="col">Periodo</th>
-          <th scope="col">Empresa / Lugar</th>
-          <th scope="col">Puesto</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2023 - 2024</td>
-          <td>Hospital Veterinario</td>
-          <td>Asistente general (apoyo en distintas tareas)</td>
-        </tr>
-        <tr>
-          <td>2022</td>
-          <td>Torneo de Tenis</td>
-          <td>Recojebolas</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+      <div class="card" id="experiencia">
+        <h2>Experiencia Laboral</h2>
+        <table>
+          <caption>Historial de Experiencia Laboral</caption>
+          <thead>
+            <tr>
+              <th>Periodo</th>
+              <th>Empresa / Lugar</th>
+              <th>Puesto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023 - 2024</td>
+              <td>Hospital Veterinario</td>
+              <td>Asistente general</td>
+            </tr>
+            <tr>
+              <td>2022</td>
+              <td>Torneo de Tenis</td>
+              <td>Recojebolas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
-  <img src="FotoDeportes.jpg" alt="Deportes">
+  <div class="foto-wrap">
+    <img src="FotoDeportes.jpg" alt="Deportes">
+  </div>
 
-  <button onclick="descargarHTML()">Descargar esta página</button>
+  <div class="actions">
+    <button onclick="descargarHTML()">Descargar esta página</button>
+  </div>
 
   <script>
     function descargarHTML() {
@@ -143,4 +121,3 @@
   </script>
 </body>
 </html>
-
