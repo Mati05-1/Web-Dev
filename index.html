@@ -11,106 +11,120 @@
   <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <h1>Matias Arroyo</h1>
-      <p class="email"><a href="mailto:matiasarroyo@ufm.edu">matiasarroyo@ufm.edu</a></p>
-      <p class="GitHub"><a href="https://github.com/Mati05-1" target="_blank">GitHub</a></p>
-      <p class="LinkedIn"><a href="https://linkedin.com/in/matias-arroyo" target="_blank">LinkedIn</a></p>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent navbar-gradient">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Matias Arroyo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="mailto:matiasarroyo@ufm.edu">matiasarroyo@ufm.edu</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/Mati05-1" target="_blank">GitHub</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://linkedin.com/in/matias-arroyo" target="_blank">LinkedIn</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tecnologias">Tecnologías</a></li>
+          <li class="nav-item"><a class="nav-link" href="#lenguajes">Lenguajes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#softskills">Soft Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#educacion">Educación</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
+        </ul>
+      </div>
     </div>
-    <nav class="main-nav">
-      <a href="#tecnologias">Tecnologías</a>
-      <a href="#lenguajes">Lenguajes</a>
-      <a href="#softskills">Soft Skills</a>
-      <a href="#educacion">Educación</a>
-      <a href="#experiencia">Experiencia</a>
-    </nav>
-  </header>
+  </nav>
 
-  <main class="layout">
-    <aside class="sidebar">
-      <h2 id="tecnologias">Tecnologías</h2>
-      <ul>
-        <li>Git</li>
-        <li>GitHub</li>
-        <li>Unity</li>
-        <li>Flask</li>
-        <li>Flutter</li>
-      </ul>
+  <main class="layout container-fluid mt-4">
+    <div class="row g-3">
+      <aside class="sidebar col-12 col-lg-3">
+        <h2 id="tecnologias">Tecnologías</h2>
+        <ul>
+          <li>Git</li>
+          <li>GitHub</li>
+          <li>Unity</li>
+          <li>Flask</li>
+          <li>Flutter</li>
+        </ul>
 
-      <h2 id="lenguajes">Lenguajes</h2>
-      <ul>
-        <li>Python</li>
-        <li>Java (básico)</li>
-        <li>C# (básico)</li>
-      </ul>
+        <h2 id="lenguajes">Lenguajes</h2>
+        <ul>
+          <li>Python</li>
+          <li>Java (básico)</li>
+          <li>C# (básico)</li>
+        </ul>
 
-      <h2 id="softskills">Soft Skills</h2>
-      <ul>
-        <li>Comunicación</li>
-        <li>Adaptabilidad</li>
-        <li>Buena gestión del tiempo</li>
-        <li>Trabajo en equipo</li>
-        <li>Organización</li>
-      </ul>
-    </aside>
+        <h2 id="softskills">Soft Skills</h2>
+        <ul>
+          <li>Comunicación</li>
+          <li>Adaptabilidad</li>
+          <li>Buena gestión del tiempo</li>
+          <li>Trabajo en equipo</li>
+          <li>Organización</li>
+        </ul>
+      </aside>
 
-    <section class="cards">
-      <div class="card" id="educacion">
-        <h2>Educación</h2>
-        <table class="table table-dark table-striped table-hover">
-          <caption>Historial Académico</caption>
-          <thead>
-            <tr>
-              <th>Año</th>
-              <th>Institución</th>
-              <th>Título</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2024 - 2027</td>
-              <td>Universidad Francisco Marroquín</td>
-              <td>Computer Science</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="cards col-12 col-lg-9">
+        <div class="card my-card" id="educacion">
+          <div class="card-body">
+            <h2 class="card-title">Educación</h2>
+            <table class="table table-dark table-striped table-hover">
+              <caption>Historial Académico</caption>
+              <thead>
+                <tr>
+                  <th>Año</th>
+                  <th>Institución</th>
+                  <th>Título</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2024 - 2027</td>
+                  <td>Universidad Francisco Marroquín</td>
+                  <td>Computer Science</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-      <div class="card" id="experiencia">
-        <h2>Experiencia Laboral</h2>
-        <table class="table table-dark table-striped table-hover">
-          <caption>Historial de Experiencia Laboral</caption>
-          <thead>
-            <tr>
-              <th>Periodo</th>
-              <th>Empresa / Lugar</th>
-              <th>Puesto</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2023 - 2024</td>
-              <td>Hospital Veterinario</td>
-              <td>Asistente general</td>
-            </tr>
-            <tr>
-              <td>2022</td>
-              <td>Torneo de Tenis</td>
-              <td>Recojebolas</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+        <div class="card my-card mt-3" id="experiencia">
+          <div class="card-body">
+            <h2 class="card-title">Experiencia Laboral</h2>
+            <table class="table table-dark table-striped table-hover">
+              <caption>Historial de Experiencia Laboral</caption>
+              <thead>
+                <tr>
+                  <th>Periodo</th>
+                  <th>Empresa / Lugar</th>
+                  <th>Puesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023 - 2024</td>
+                  <td>Hospital Veterinario</td>
+                  <td>Asistente general</td>
+                </tr>
+                <tr>
+                  <td>2022</td>
+                  <td>Torneo de Tenis</td>
+                  <td>Recojebolas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <div class="foto-wrap">
-    <img src="https://sportsmedicinesystems.com/wp-content/uploads/2021/08/Foro-virtual-El-deporte-dentro-y-fuera-de-la-cancha-2.jpg" alt="Deportes" class="img-fluid rounded-circle border border-3 border-light shadow">
+  <div class="foto-wrap text-center mt-4">
+    <img src="https://sportsmedicinesystems.com/wp-content/uploads/2021/08/Foro-virtual-El-deporte-dentro-y-fuera-de-la-cancha-2.jpg"
+         alt="Deportes" class="img-fluid rounded-circle border border-3 border-light shadow foto-principal">
   </div>
 
-  <div class="actions">
-    <button onclick="descargarHTML()" class="btn btn-primary btn-lg mt-3 shadow">Descargar esta página</button>
+  <div class="actions text-center mt-3 mb-5">
+    <button class="btn btn-primary btn-lg shadow" onclick="descargarHTML()">Descargar esta página</button>
   </div>
 
   <script>
@@ -127,4 +141,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
