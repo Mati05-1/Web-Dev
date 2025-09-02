@@ -35,7 +35,7 @@ body {
 /* Layout */
 .layout { gap: calc(var(--space) * 1.25); align-items: start; }
 
-/* Sidebar styles - usando list-group visual */
+/* Sidebar */
 .sidebar {
   background: rgba(255,255,255,0.02);
   padding: 12px;
@@ -48,7 +48,7 @@ body {
   border: 1px solid rgba(255,255,255,0.03);
 }
 
-/* Cards (Bootstrap + overrides para mantener estilo) */
+/* Cards */
 .my-card {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius: calc(var(--radius) - 2px);
@@ -59,14 +59,17 @@ body {
 .my-card .card-body { padding: 18px; }
 .my-card .card-title { color: var(--fg); margin-bottom: 8px; }
 
-/* Tabla compacta (dentro de tarjetas) */
+/* Tablas */
 .table-sm th, .table-sm td { padding: 8px 10px; }
 .table-borderless tbody tr td { border-bottom: 1px solid rgba(255,255,255,0.03); }
 .table-borderless thead th { color: var(--accent-2); }
 
-/* Foto */
+/* Foto / Carousel styling */
 .foto-wrap { margin-top: 18px; text-align: center; }
-.foto-principal { width: 220px; height: 220px; object-fit: cover; }
+.carousel-image { height: 360px; object-fit: cover; width: 100%; display: block; }
+@media (max-width: 768px) {
+  .carousel-image { height: 220px; }
+}
 
 /* Actions */
 .actions { margin-top: 14px; text-align: center; }
@@ -95,4 +98,3 @@ body {
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   a[href]::after { content: ""; }
 }
-
