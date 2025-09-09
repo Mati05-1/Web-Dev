@@ -14,9 +14,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es.min.js"></script>
 </head>
 <body>
-  <!-- Saludo dinámico -->
-  <div id="saludo" class="text-center mt-3 fs-4 fw-bold"></div>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent navbar-gradient">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="#">Matias Arroyo</a>
@@ -40,7 +37,7 @@
     </div>
   </nav>
 
-  <!-- Layout (igual que antes) -->
+  <!-- Layout -->
   <main class="layout container-fluid mt-4">
     <div class="row g-4">
       <aside class="sidebar col-12 col-lg-3">
@@ -102,29 +99,32 @@
             <div class="card my-card h-100" id="experiencia">
               <div class="card-body">
                 <h3 class="card-title">Experiencia Laboral</h3>
-                <p class="card-text mb-2">Experiencia en distintos puestos y roles.</p>
-                <table class="table table-borderless table-sm">
-                  <caption>Historial de Experiencia Laboral</caption>
-                  <thead>
-                    <tr>
-                      <th>Periodo</th>
-                      <th>Empresa / Lugar</th>
-                      <th>Puesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>2023 - 2024</td>
-                      <td>Hospital Veterinario</td>
-                      <td>Asistente general</td>
-                    </tr>
-                    <tr>
-                      <td>2022</td>
-                      <td>Torneo de Tenis</td>
-                      <td>Recojebolas</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <button id="toggle-experiencia" class="btn btn-sm btn-outline-light mb-2">Mostrar/Ocultar</button>
+                <div id="contenido-experiencia">
+                  <p class="card-text mb-2">Experiencia en distintos puestos y roles.</p>
+                  <table class="table table-borderless table-sm">
+                    <caption>Historial de Experiencia Laboral</caption>
+                    <thead>
+                      <tr>
+                        <th>Periodo</th>
+                        <th>Empresa / Lugar</th>
+                        <th>Puesto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2023 - 2024</td>
+                        <td>Hospital Veterinario</td>
+                        <td>Asistente general</td>
+                      </tr>
+                      <tr>
+                        <td>2022</td>
+                        <td>Torneo de Tenis</td>
+                        <td>Recojebolas</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
