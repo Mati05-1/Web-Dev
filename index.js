@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarSaludo();
   setInterval(actualizarSaludo, 60000);
 
-    // Commit 2 - botón para mostrar/ocultar experiencia
+  // Commit 2 - botón para mostrar/ocultar experiencia
   const btnExperiencia = document.getElementById("toggle-experiencia");
   const contenidoExperiencia = document.getElementById("contenido-experiencia");
 
@@ -27,4 +27,40 @@ document.addEventListener("DOMContentLoaded", () => {
       contenidoExperiencia.style.display = "none";
     }
   });
+
+  // Commit 3 - funcionalidad de modo oscuro/claro
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  const body = document.body;
+
+  // Cargar tema guardado o usar tema del sistema
+  function loadTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = savedTheme || (prefersDark ? "dark" : "light");
+    
+    body.setAttribute("data-theme", theme);
+    updateThemeIcon(theme);
+  }
+
+  // Actualizar icono del botón
+  function updateThemeIcon(theme) {
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+  }
+
+  // Cambiar tema
+  function toggleTheme() {
+    const currentTheme = body.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    
+    body.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateThemeIcon(newTheme);
+  }
+
+  // Event listener para el botón
+  themeToggle.addEventListener("click", toggleTheme);
+
+  // Cargar tema al iniciar
+  loadTheme();
 });
