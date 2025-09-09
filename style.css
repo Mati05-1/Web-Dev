@@ -129,6 +129,38 @@ body {
   .carousel-image { height: 220px; }
 }
 
+/* Contact Info */
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.contact-item a {
+  color: var(--fg);
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--accent-2);
+}
+
+.contact-item i {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+#contact-info {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Actions */
 .actions { margin-top: 14px; text-align: center; }
 
