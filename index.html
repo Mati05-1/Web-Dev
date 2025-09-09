@@ -82,29 +82,40 @@
   <main class="layout container-fluid mt-4">
     <div class="row g-4">
       <aside class="sidebar col-12 col-lg-3">
+        <!-- Buscador de Habilidades -->
+        <div class="mb-4">
+          <h4 class="mb-3">🔍 Buscar Habilidades</h4>
+          <div class="input-group">
+            <input type="text" id="skill-search" class="form-control" placeholder="Buscar..." aria-label="Buscar habilidades">
+            <button class="btn btn-outline-secondary" type="button" id="clear-search" title="Limpiar búsqueda">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+        </div>
+
         <h2 id="tecnologias">Tecnologías</h2>
-        <ul class="list-group mb-3">
-          <li class="list-group-item">Git</li>
-          <li class="list-group-item">GitHub</li>
-          <li class="list-group-item">Unity</li>
-          <li class="list-group-item">Flask</li>
-          <li class="list-group-item">Flutter</li>
+        <ul class="list-group mb-3" id="tecnologias-list">
+          <li class="list-group-item skill-item" data-skill="git">Git</li>
+          <li class="list-group-item skill-item" data-skill="github">GitHub</li>
+          <li class="list-group-item skill-item" data-skill="unity">Unity</li>
+          <li class="list-group-item skill-item" data-skill="flask">Flask</li>
+          <li class="list-group-item skill-item" data-skill="flutter">Flutter</li>
         </ul>
 
         <h2 id="lenguajes">Lenguajes</h2>
-        <ul class="list-group mb-3">
-          <li class="list-group-item">Python</li>
-          <li class="list-group-item">Java (básico)</li>
-          <li class="list-group-item">C# (básico)</li>
+        <ul class="list-group mb-3" id="lenguajes-list">
+          <li class="list-group-item skill-item" data-skill="python">Python</li>
+          <li class="list-group-item skill-item" data-skill="java">Java (básico)</li>
+          <li class="list-group-item skill-item" data-skill="csharp">C# (básico)</li>
         </ul>
 
         <h2 id="softskills">Soft Skills</h2>
-        <ul class="list-group">
-          <li class="list-group-item">Comunicación</li>
-          <li class="list-group-item">Adaptabilidad</li>
-          <li class="list-group-item">Buena gestión del tiempo</li>
-          <li class="list-group-item">Trabajo en equipo</li>
-          <li class="list-group-item">Organización</li>
+        <ul class="list-group" id="softskills-list">
+          <li class="list-group-item skill-item" data-skill="comunicacion">Comunicación</li>
+          <li class="list-group-item skill-item" data-skill="adaptabilidad">Adaptabilidad</li>
+          <li class="list-group-item skill-item" data-skill="gestion-tiempo">Buena gestión del tiempo</li>
+          <li class="list-group-item skill-item" data-skill="trabajo-equipo">Trabajo en equipo</li>
+          <li class="list-group-item skill-item" data-skill="organizacion">Organización</li>
         </ul>
       </aside>
 
@@ -182,10 +193,10 @@
         <button type="button" data-bs-target="#fotoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner rounded-3 overflow-hidden shadow">
-        <div class="carousel-item active">
-          <img src="https://sportsmedicinesystems.com/wp-content/uploads/2021/08/Foro-virtual-El-deporte-dentro-y-fuera-de-la-cancha-2.jpg"
-               class="d-block w-100 carousel-image" alt="Deportes 1">
-        </div>
+          <div class="carousel-item active">
+            <img src="foto-principal.jpg"
+                 class="d-block w-100 carousel-image" alt="Foto Principal">
+          </div>
         <div class="carousel-item">
           <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=1200&q=80&auto=format&fit=crop"
                class="d-block w-100 carousel-image" alt="Deportes 2">
@@ -225,4 +236,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
