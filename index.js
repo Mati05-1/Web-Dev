@@ -63,4 +63,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cargar tema al iniciar
   loadTheme();
+
+  // Commit 4 - funcionalidad de mostrar/ocultar información de contacto
+  const contactToggle = document.getElementById("contact-toggle");
+  const contactInfo = document.getElementById("contact-info");
+  const contactIcon = document.getElementById("contact-icon");
+
+  // Cambiar estado del botón y mostrar/ocultar contacto
+  function toggleContact() {
+    const isVisible = contactInfo.style.display !== "none";
+    
+    if (isVisible) {
+      contactInfo.style.display = "none";
+      contactIcon.textContent = "📧";
+      contactToggle.innerHTML = '<span id="contact-icon">📧</span> Contacto';
+    } else {
+      contactInfo.style.display = "block";
+      contactIcon.textContent = "❌";
+      contactToggle.innerHTML = '<span id="contact-icon">❌</span> Ocultar';
+    }
+  }
+
+  // Event listener para el botón de contacto
+  contactToggle.addEventListener("click", toggleContact);
 });
+
