@@ -1,0 +1,50 @@
+    <!-- Buscador de Habilidades -->
+    <div class="mb-4 skill-search-container">
+      <h4 class="mb-3 skill-search-title">Buscar Habilidades</h4>
+  <div class="input-group">
+    <input type="text" 
+           [(ngModel)]="skillSearchTerm" 
+           (input)="filterSkills()"
+           class="form-control" 
+           placeholder="Buscar..." 
+           aria-label="Buscar habilidades">
+    <button class="btn btn-outline-secondary" type="button" (click)="clearSkillSearch()" title="Limpiar búsqueda">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+</div>
+
+    <!-- Tecnologías -->
+    <h2 id="tecnologias" class="skill-section-title">Tecnologías</h2>
+<ul class="list-group mb-3" id="tecnologias-list">
+  <li *ngFor="let skill of filteredTechnologies" 
+      class="list-group-item skill-item" 
+      [class.highlight]="skill.highlighted"
+      [style.display]="skill.visible ? 'block' : 'none'"
+      [attr.data-skill]="skill.dataSkill">{{ skill.name }}</li>
+</ul>
+
+    <!-- Lenguajes -->
+    <h2 id="lenguajes" class="skill-section-title">Lenguajes</h2>
+<ul class="list-group mb-3" id="lenguajes-list">
+  <li *ngFor="let skill of filteredLanguages" 
+      class="list-group-item skill-item" 
+      [class.highlight]="skill.highlighted"
+      [style.display]="skill.visible ? 'block' : 'none'"
+      [attr.data-skill]="skill.dataSkill">{{ skill.name }}</li>
+</ul>
+
+    <!-- Soft Skills -->
+    <h2 id="softskills" class="skill-section-title">Soft Skills</h2>
+<ul class="list-group" id="softskills-list">
+  <li *ngFor="let skill of filteredSoftSkills" 
+      class="list-group-item skill-item" 
+      [class.highlight]="skill.highlighted"
+      [style.display]="skill.visible ? 'block' : 'none'"
+      [attr.data-skill]="skill.dataSkill">{{ skill.name }}</li>
+</ul>
+
+<!-- Mensaje de no resultados -->
+<div *ngIf="showNoResults" class="no-results-message alert alert-info mt-2">
+  <i class="bi bi-search"></i> No se encontraron habilidades que coincidan con "{{ skillSearchTerm }}"
+</div>
