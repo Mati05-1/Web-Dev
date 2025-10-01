@@ -1,0 +1,143 @@
+/* Education Component Styles */
+.education-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.7s ease-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.card-title {
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '🎓';
+    margin-right: 0.75rem;
+    font-size: 1.3rem;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+    border-radius: 2px;
+  }
+}
+
+.card-text {
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.education-table {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  caption {
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  thead {
+    background: linear-gradient(135deg, rgba(34, 193, 195, 0.2) 0%, rgba(125, 249, 255, 0.1) 100%);
+    
+    th {
+      color: var(--accent-2);
+      font-weight: 600;
+      border: none;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      position: relative;
+      
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 20%;
+        width: 1px;
+        height: 60%;
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  
+  tbody {
+    tr {
+      transition: all 0.3s ease;
+      border: none;
+      
+      &:hover {
+        background: rgba(34, 193, 195, 0.1);
+        transform: scale(1.02);
+      }
+      
+      td {
+        color: var(--fg);
+        border: none;
+        padding: 1rem 0.75rem;
+        vertical-align: middle;
+        
+        &:first-child {
+          font-weight: 600;
+          color: var(--accent-2);
+        }
+        
+        &:nth-child(2) {
+          font-weight: 500;
+        }
+        
+        &:last-child {
+          font-style: italic;
+          color: var(--muted);
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .education-table {
+    font-size: 0.9rem;
+    
+    th, td {
+      padding: 0.75rem 0.5rem;
+    }
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+  }
+}
