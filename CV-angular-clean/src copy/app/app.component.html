@@ -1,0 +1,11 @@
+<!-- Header Component -->
+<app-header 
+  (contactToggle)="toggleContact()" 
+  (themeToggle)="onThemeToggle()">
+</app-header>
+
+<!-- Contact Info Component -->
+<app-contact-info [visible]="contactVisible"></app-contact-info>
+
+<!-- Router Outlet for Page Components -->
+<router-outlet></router-outlet>

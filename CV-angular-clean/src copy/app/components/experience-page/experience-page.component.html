@@ -1,0 +1,48 @@
+<div class="experience-page-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h1 class="page-title">
+            <i class="bi bi-briefcase-fill me-3"></i>
+            Experiencia
+          </h1>
+          <p class="page-subtitle">
+            Mi trayectoria profesional y formación académica
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="nav-tabs-container">
+          <nav class="nav nav-pills justify-content-center">
+            <a class="nav-link" 
+               routerLink="/experience/jobs" 
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact: false}">
+              <i class="bi bi-briefcase me-2"></i>
+              Trabajos
+            </a>
+            <a class="nav-link" 
+               routerLink="/experience/studies" 
+               routerLinkActive="active">
+              <i class="bi bi-mortarboard me-2"></i>
+              Estudios
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Router Outlet for Child Routes -->
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

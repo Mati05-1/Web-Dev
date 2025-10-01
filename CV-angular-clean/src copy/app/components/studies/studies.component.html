@@ -1,0 +1,68 @@
+<div class="studies-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h2 class="page-title">
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            {{ 'Formación Académica' | uppercase }}
+          </h2>
+          <p class="page-subtitle">
+            Mi trayectoria educativa y logros académicos
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Studies List -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="studies-list">
+          <div *ngFor="let study of studies; let i = index" 
+               class="study-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Study Header -->
+            <div class="study-header">
+              <div class="study-period">{{ study.period }}</div>
+              <div class="study-institution">{{ study.institution | reverse }}</div>
+              <div class="study-title">{{ study.title }}</div>
+            </div>
+
+            <!-- Study Description -->
+            <div class="study-description">
+              <p>{{ study.description }}</p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="study-achievements" *ngIf="study.achievements && study.achievements.length > 0">
+              <h5 class="achievements-title">
+                <i class="bi bi-trophy-fill me-2"></i>
+                Logros Académicos
+              </h5>
+              <ul class="achievements-list">
+                <li *ngFor="let achievement of study.achievements">
+                  {{ achievement }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- Skills -->
+            <div class="study-skills" *ngIf="study.skills && study.skills.length > 0">
+              <h5 class="skills-title">
+                <i class="bi bi-book-fill me-2"></i>
+                Habilidades Desarrolladas
+              </h5>
+              <div class="skills-tags">
+                <span *ngFor="let skill of study.skills" class="skill-tag">
+                  {{ skill }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
