@@ -1,0 +1,92 @@
+<div class="jobs-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h2 class="page-title">
+            <i class="bi bi-briefcase-fill me-2"></i>
+            Experiencia Laboral
+          </h2>
+          <p class="page-subtitle">
+            Mis trabajos y experiencias profesionales
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Basic Jobs from Service -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card basic-jobs-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-briefcase me-2"></i>
+              Tipos de Trabajos Disponibles
+            </h3>
+            <div class="basic-jobs-list">
+              <div class="job-category">
+                <h5>Posiciones de Desarrollo</h5>
+                <div class="job-tags">
+                  <span *ngFor="let job of basicJobs" class="job-tag">
+                    {{ job }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jobs List -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="jobs-list">
+          <div *ngFor="let job of jobs; let i = index" 
+               class="job-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Job Header -->
+            <div class="job-header">
+              <div class="job-period">{{ job.period }}</div>
+              <div class="job-company">{{ job.company | reverse }}</div>
+              <div class="job-position">{{ job.position }}</div>
+            </div>
+
+            <!-- Job Description -->
+            <div class="job-description">
+              <p>{{ job.description }}</p>
+            </div>
+
+            <!-- Responsibilities -->
+            <div class="job-responsibilities">
+              <h5 class="responsibilities-title">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                Responsabilidades
+              </h5>
+              <ul class="responsibilities-list">
+                <li *ngFor="let responsibility of job.responsibilities">
+                  {{ responsibility }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- Technologies -->
+            <div class="job-technologies" *ngIf="job.technologies && job.technologies.length > 0">
+              <h5 class="technologies-title">
+                <i class="bi bi-gear-fill me-2"></i>
+                Tecnologías Utilizadas
+              </h5>
+              <div class="technologies-tags">
+                <span *ngFor="let tech of job.technologies" class="tech-tag">
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

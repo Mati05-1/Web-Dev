@@ -1,0 +1,23 @@
+    <div class="card my-card h-100 education-card" id="educacion">
+      <div class="card-body">
+        <h3 class="card-title">Educación</h3>
+    <p class="card-text mb-2">Historial académico y formación.</p>
+        <table class="table table-borderless table-sm education-table">
+      <caption>Historial Académico</caption>
+      <thead>
+        <tr>
+          <th>Año</th>
+          <th>Institución</th>
+          <th>Título</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of educationRecords">
+          <td>{{ record.year }}</td>
+          <td>{{ record.institution }}</td>
+          <td>{{ record.title }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
