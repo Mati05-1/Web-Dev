@@ -11,6 +11,12 @@
           <p class="page-subtitle">
             Algunos de mis proyectos desarrollados y disponibles en GitHub
           </p>
+          <div class="last-updated" *ngIf="lastUpdated && !loading">
+            <small class="text-muted">
+              <i class="bi bi-clock me-1"></i>
+              Última actualización: {{ lastUpdated }}
+            </small>
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +28,8 @@
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Cargando...</span>
           </div>
-          <p class="mt-3">Cargando proyectos...</p>
+          <p class="mt-3">Conectando con GitHub...</p>
+          <small class="text-muted">Obteniendo tus proyectos más recientes</small>
         </div>
       </div>
     </div>
@@ -32,7 +39,8 @@
       <div class="col-12 col-lg-8 text-center">
         <div class="error-card">
           <i class="bi bi-exclamation-triangle-fill text-warning mb-3" style="font-size: 2rem;"></i>
-          <p>{{ error }}</p>
+          <h5>{{ error }}</h5>
+          <p class="text-muted">Se mostrarán proyectos de ejemplo mientras tanto</p>
           <button class="btn btn-primary" (click)="loadProjects()">
             <i class="bi bi-arrow-clockwise me-2"></i>
             Reintentar
@@ -49,18 +57,32 @@
                class="project-card"
                [style.animation-delay]="(i * 0.1) + 's'">
             
+            <!-- Project Language Badge (esquina superior derecha) -->
+            <div class="project-language-badge">
+              {{ getProjectBadgeText(project) }}
+            </div>
+
             <!-- Project Header -->
             <div class="project-header">
               <div class="project-name">
                 <i class="bi bi-code-slash me-2"></i>
                 {{ project.name }}
               </div>
-              <div class="project-language">{{ project.language }}</div>
             </div>
 
             <!-- Project Description -->
             <div class="project-description">
-              <p>{{ project.description || 'Sin descripción disponible' }}</p>
+              <p>{{ project.description }}</p>
+            </div>
+
+            <!-- Project Topics -->
+            <div class="project-topics" *ngIf="getProjectTopics(project).length > 0">
+              <div class="topics-container">
+                <span *ngFor="let topic of getProjectTopics(project)" 
+                      class="topic-tag">
+                  {{ topic }}
+                </span>
+              </div>
             </div>
 
             <!-- Project Stats -->
@@ -68,6 +90,10 @@
               <div class="stat-item">
                 <i class="bi bi-star-fill me-1"></i>
                 <span>{{ project.stargazers_count }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="bi bi-git me-1"></i>
+                <span>{{ project.forks_count }}</span>
               </div>
               <div class="stat-item">
                 <i class="bi bi-calendar3 me-1"></i>
@@ -96,6 +122,24 @@
           <i class="bi bi-folder-x text-muted mb-3" style="font-size: 3rem;"></i>
           <h4>No hay proyectos disponibles</h4>
           <p>Parece que no se encontraron proyectos para mostrar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub Link -->
+    <div class="row justify-content-center mt-4" *ngIf="!loading && !error && projects.length > 0">
+      <div class="col-12 text-center">
+        <div class="github-link-card">
+          <p class="mb-2">
+            <i class="bi bi-github me-2"></i>
+            ¿Quieres ver más proyectos?
+          </p>
+          <a href="https://github.com/Mati05-1" 
+             target="_blank" 
+             class="btn btn-outline-primary">
+            <i class="bi bi-box-arrow-up-right me-2"></i>
+            Visitar mi perfil de GitHub
+          </a>
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@ export interface Study {
 export class DataService {
   
   // Skills data
-  skills: string[] = ['Angular', 'TypeScript', 'CSS'];
+  skills: string[] = ['Angular', 'TypeScript', 'CSS', 'HTML', 'JavaScript'];
   
   // Jobs data
   jobs: string[] = ['Frontend Dev', 'Backend Dev', 'Fullstack Dev'];
@@ -54,7 +54,8 @@ export class DataService {
     { name: 'C# (básico)', dataSkill: 'csharp', visible: true, highlighted: false },
     { name: 'TypeScript', dataSkill: 'typescript', visible: true, highlighted: false },
     { name: 'JavaScript', dataSkill: 'javascript', visible: true, highlighted: false },
-    { name: 'HTML/CSS', dataSkill: 'htmlcss', visible: true, highlighted: false }
+    { name: 'HTML', dataSkill: 'html', visible: true, highlighted: false },
+    { name: 'CSS', dataSkill: 'css', visible: true, highlighted: false }
   ];
   
   softSkills: Skill[] = [
