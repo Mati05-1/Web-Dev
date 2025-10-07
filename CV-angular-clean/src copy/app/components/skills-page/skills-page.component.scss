@@ -1,0 +1,443 @@
+/* Skills Page Component Styles */
+.skills-page-container {
+  padding: 2rem 0;
+  min-height: 100vh;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  color: var(--accent-2);
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  i {
+    color: var(--accent);
+    font-size: 2rem;
+  }
+}
+
+.page-subtitle {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.skills-wrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 1s ease-out;
+}
+
+.mini-game-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: fadeInUp 1.2s ease-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.card-title {
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+  
+  i {
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+}
+
+.card-text {
+  color: var(--fg);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.basic-skills-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: fadeInUp 1.4s ease-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.basic-skills-list {
+  margin-top: 1.5rem;
+}
+
+.skill-category {
+  text-align: center;
+  
+  h5 {
+    color: var(--accent-2);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.skill-tag {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 193, 195, 0.3);
+  }
+}
+
+/* Mini Game Styles */
+.game-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.score-display {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  
+  .score {
+    color: var(--accent-2);
+  }
+  
+  .high-score {
+    color: var(--accent);
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  cursor: pointer;
+  perspective: 1000px;
+  
+  &:hover .card-inner {
+    transform: scale(1.05);
+  }
+  
+  &.matched {
+    opacity: 0.7;
+    cursor: default;
+  }
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: var(--radius);
+  
+  .memory-card.flipped & {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-front {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--fg);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.high-score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  z-index: 30;
+  animation: gameOverPop 0.5s ease-out;
+  
+  h4 {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 193, 195, 0.3);
+    }
+  }
+}
+
+.start-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  z-index: 30;
+  animation: startScreenFade 2s ease-in-out infinite;
+  
+  h4 {
+    color: var(--accent-2);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  p {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+}
+
+.game-instructions {
+  margin-top: 1rem;
+  
+  small {
+    color: var(--muted);
+    font-size: 0.9rem;
+    
+    i {
+      color: var(--accent);
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+/* Game Animations */
+
+@keyframes gameOverPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes startScreenFade {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes cardFlip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(180deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+    flex-direction: column;
+    
+    i {
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .skills-wrapper {
+    padding: 1rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+  }
+  
+  .game-container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .card-front,
+  .card-back {
+    font-size: 1.5rem;
+  }
+  
+  .score {
+    font-size: 1rem;
+  }
+  
+  .high-score {
+    font-size: 0.9rem;
+  }
+  
+  .game-over {
+    padding: 1.5rem;
+    
+    h4 {
+      font-size: 1.3rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .start-screen {
+    padding: 1.5rem;
+    
+    h4 {
+      font-size: 1.1rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
+

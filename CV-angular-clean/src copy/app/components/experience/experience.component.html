@@ -1,0 +1,26 @@
+<div class="card my-card h-100 experience-card" id="experiencia">
+  <div class="card-body">
+    <h3 class="card-title">Experiencia Laboral</h3>
+    <button (click)="toggleVisibility()" class="btn btn-sm btn-outline-light mb-2 toggle-button">Mostrar/Ocultar</button>
+    <div class="experience-content" [style.display]="visible ? 'block' : 'none'">
+      <p class="card-text mb-2">Experiencia en distintos puestos y roles.</p>
+      <table class="table table-borderless table-sm experience-table">
+        <caption>Historial de Experiencia Laboral</caption>
+        <thead>
+          <tr>
+            <th>Periodo</th>
+            <th>Empresa / Lugar</th>
+            <th>Puesto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of experienceRecords">
+            <td>{{ record.period }}</td>
+            <td>{{ record.company }}</td>
+            <td>{{ record.position }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

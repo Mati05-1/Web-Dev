@@ -1,0 +1,228 @@
+/* Studies Component Styles */
+.studies-container {
+  padding: 2rem 0;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  color: var(--accent-2);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  i {
+    color: var(--accent);
+    font-size: 1.5rem;
+  }
+}
+
+.page-subtitle {
+  color: var(--muted);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.studies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.study-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: slideInUp 0.6s ease-out both;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.study-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  
+  .study-period {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .study-institution {
+    color: var(--accent-2);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .study-title {
+    color: var(--fg);
+    font-weight: 500;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}
+
+.study-description {
+  margin-bottom: 1.5rem;
+  
+  p {
+    color: var(--fg);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+}
+
+.study-achievements {
+  margin-bottom: 1.5rem;
+  
+  .achievements-title {
+    color: var(--accent-2);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    
+    i {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+  }
+  
+  .achievements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      color: var(--fg);
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.6;
+      
+      &::before {
+        content: '🏆';
+        position: absolute;
+        left: 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.study-skills {
+  .skills-title {
+    color: var(--accent-2);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    
+    i {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+  }
+  
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .skill-tag {
+    background: linear-gradient(135deg, rgba(34, 193, 195, 0.2) 0%, rgba(125, 249, 255, 0.1) 100%);
+    border: 1px solid rgba(34, 193, 195, 0.3);
+    color: var(--fg);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      border-color: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 193, 195, 0.3);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    
+    i {
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .study-card {
+    padding: 1.5rem;
+  }
+  
+  .study-header {
+    .study-institution {
+      font-size: 1.3rem;
+    }
+    
+    .study-title {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .study-description p {
+    font-size: 1rem;
+  }
+  
+  .skills-tags {
+    justify-content: center;
+  }
+}
