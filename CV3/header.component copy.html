@@ -1,0 +1,33 @@
+    <!-- Saludo dinámico -->
+    <h1 class="text-center my-4 greeting">{{ greeting }}</h1>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent navbar-gradient">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Matias Arroyo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <button (click)="toggleContact()" class="btn btn-outline-light btn-sm me-2" title="Mostrar/Ocultar Contacto">
+            <span>{{ contactIcon }}</span> {{ contactButtonText }}
+          </button>
+        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about">Biografía</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/skills">Habilidades</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/projects">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/sports">Deportes</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/experience/jobs">Experiencia</a></li>
+        <li class="nav-item">
+          <button (click)="toggleTheme()" class="btn btn-outline-light btn-sm ms-2" title="Cambiar tema">
+            <span>{{ themeIcon }}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
