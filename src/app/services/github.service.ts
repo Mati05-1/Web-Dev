@@ -28,39 +28,52 @@ export class GithubService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Obtiene los repositorios públicos del usuario
+   * Obtiene los repositorios del usuario desde GitHub
    */
   getUserRepositories(): Observable<GitHubProject[]> {
-    const url = `${this.GITHUB_API_URL}/users/${this.USERNAME}/repos`;
-    
-    return this.http.get<any[]>(url).pipe(
-      map(repos => this.mapRepositoriesToProjects(repos)),
-      catchError(error => {
-        console.error('Error fetching GitHub repositories:', error);
-        // Retornar datos de ejemplo en caso de error
-        return of(this.getFallbackProjects());
-      })
-    );
+    const headers = new HttpHeaders({
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'CV-Angular-App'
+    });
+
+    return this.http.get<any[]>(`${this.GITHUB_API_URL}/users/${this.USERNAME}/repos`, { headers })
+      .pipe(
+        map(repos => this.mapRepositoriesToProjects(repos)),
+        catchError(error => {
+          console.error('Error fetching repositories:', error);
+          return of(this.getFallbackProjects());
+        })
+      );
   }
 
   /**
    * Obtiene repositorios específicos por nombre
    */
   getSpecificRepositories(repoNames: string[]): Observable<GitHubProject[]> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'CV-Angular-App'
+    });
+
     const requests = repoNames.map(repoName => 
-      this.http.get<any>(`${this.GITHUB_API_URL}/repos/${this.USERNAME}/${repoName}`)
+      this.http.get<any>(`${this.GITHUB_API_URL}/repos/${this.USERNAME}/${repoName}`, { headers })
+        .pipe(catchError(() => of(null)))
     );
 
-    return this.http.get<any[]>(`${this.GITHUB_API_URL}/users/${this.USERNAME}/repos`).pipe(
-      map(repos => {
-        const filteredRepos = repos.filter(repo => repoNames.includes(repo.name));
-        return this.mapRepositoriesToProjects(filteredRepos);
-      }),
-      catchError(error => {
-        console.error('Error fetching specific repositories:', error);
-        return of(this.getFallbackProjects());
-      })
-    );
+    return new Observable(observer => {
+      Promise.all(requests.map(req => req.toPromise()))
+        .then(responses => {
+          const validRepos = responses.filter(repo => repo !== null);
+          const projects = this.mapRepositoriesToProjects(validRepos);
+          observer.next(projects);
+          observer.complete();
+        })
+        .catch(error => {
+          console.error('Error fetching specific repositories:', error);
+          observer.next(this.getFallbackProjects());
+          observer.complete();
+        });
+    });
   }
 
   /**
@@ -94,10 +107,10 @@ export class GithubService {
     return [
       {
         id: 1,
-        name: 'cv-angular',
-        full_name: 'Mati05-1/cv-angular',
-        description: 'CV interactivo desarrollado con Angular - Mi proyecto principal',
-        html_url: 'https://github.com/Mati05-1/cv-angular',
+        name: 'CV-Angular',
+        full_name: 'Mati05-1/CV-Angular',
+        description: 'CV interactivo desarrollado con Angular',
+        html_url: 'https://github.com/Mati05-1/CV-Angular',
         stargazers_count: 0,
         language: 'TypeScript',
         updated_at: new Date().toISOString(),
@@ -108,37 +121,37 @@ export class GithubService {
       },
       {
         id: 2,
-        name: 'proyecto-ejemplo-react',
-        full_name: 'Mati05-1/proyecto-ejemplo-react',
-        description: 'Aplicación web desarrollada con React y Node.js',
-        html_url: 'https://github.com/Mati05-1/proyecto-ejemplo-react',
-        stargazers_count: 3,
-        language: 'JavaScript',
-        updated_at: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
-        created_at: new Date(Date.now() - 2592000000).toISOString(), // 30 días atrás
-        topics: ['react', 'javascript', 'nodejs'],
-        forks_count: 1,
-        open_issues_count: 2
+        name: 'Web-Dev',
+        full_name: 'Mati05-1/Web-Dev',
+        description: 'Proyectos de desarrollo web',
+        html_url: 'https://github.com/Mati05-1/Web-Dev',
+        stargazers_count: 0,
+        language: 'HTML',
+        updated_at: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        topics: ['html', 'css', 'javascript', 'web'],
+        forks_count: 0,
+        open_issues_count: 0
       },
       {
         id: 3,
-        name: 'app-movil-flutter',
-        full_name: 'Mati05-1/app-movil-flutter',
-        description: 'Aplicación móvil desarrollada con Flutter para gestión de tareas',
-        html_url: 'https://github.com/Mati05-1/app-movil-flutter',
-        stargazers_count: 8,
-        language: 'Dart',
-        updated_at: new Date(Date.now() - 172800000).toISOString(), // 2 días atrás
-        created_at: new Date(Date.now() - 5184000000).toISOString(), // 60 días atrás
-        topics: ['flutter', 'dart', 'mobile', 'app'],
-        forks_count: 2,
-        open_issues_count: 1
+        name: 'Python-Projects',
+        full_name: 'Mati05-1/Python-Projects',
+        description: 'Proyectos desarrollados en Python',
+        html_url: 'https://github.com/Mati05-1/Python-Projects',
+        stargazers_count: 0,
+        language: 'Python',
+        updated_at: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        topics: ['python', 'programming', 'automation'],
+        forks_count: 0,
+        open_issues_count: 0
       }
     ];
   }
 
   /**
-   * Formatea la fecha para mostrar de manera legible
+   * Formatea una fecha ISO a formato legible
    */
   formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -146,19 +159,10 @@ export class GithubService {
     const diffTime = Math.abs(now.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 1) {
-      return 'Hace 1 día';
-    } else if (diffDays < 7) {
-      return `Hace ${diffDays} días`;
-    } else if (diffDays < 30) {
-      const weeks = Math.floor(diffDays / 7);
-      return weeks === 1 ? 'Hace 1 semana' : `Hace ${weeks} semanas`;
-    } else if (diffDays < 365) {
-      const months = Math.floor(diffDays / 30);
-      return months === 1 ? 'Hace 1 mes' : `Hace ${months} meses`;
-    } else {
-      const years = Math.floor(diffDays / 365);
-      return years === 1 ? 'Hace 1 año' : `Hace ${years} años`;
-    }
+    if (diffDays === 1) return 'Hace 1 día';
+    if (diffDays < 7) return `Hace ${diffDays} días`;
+    if (diffDays < 30) return `Hace ${Math.ceil(diffDays / 7)} semanas`;
+    if (diffDays < 365) return `Hace ${Math.ceil(diffDays / 30)} meses`;
+    return `Hace ${Math.ceil(diffDays / 365)} años`;
   }
 }
