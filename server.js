@@ -7,89 +7,530 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json());
 
-// Base de datos en memoria
-let projects = [
-  { id: 1, name: 'CV en Angular', stars: 5 },
-  { id: 2, name: 'Juego de Memoria', stars: 4 }
+// ========================================
+// BASE DE DATOS EN MEMORIA PARA CV
+// ========================================
+
+// Experiencias laborales
+let experiences = [
+  {
+    id: 1,
+    company: "Tech Solutions Inc",
+    position: "Frontend Developer",
+    period: "2023 - Presente",
+    description: "Desarrollo de aplicaciones web modernas usando Angular y TypeScript",
+    technologies: ["Angular", "TypeScript", "SCSS", "RxJS"],
+    achievements: ["Mejoré el rendimiento de la app en 40%", "Implementé testing automatizado"]
+  },
+  {
+    id: 2,
+    company: "StartupXYZ",
+    position: "Junior Developer",
+    period: "2022 - 2023",
+    description: "Desarrollo full-stack de aplicaciones web",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    achievements: ["Lancé 3 features principales", "Reduje bugs en producción en 60%"]
+  }
 ];
 
-// Rutas
+// Educación
+let education = [
+  {
+    id: 1,
+    institution: "Universidad Francisco Marroquín",
+    degree: "Computer Science",
+    period: "2024 - 2027",
+    description: "Estudiante de Ciencias de la Computación",
+    gpa: "3.8",
+    courses: ["Algoritmos", "Estructuras de Datos", "Base de Datos", "Desarrollo Web"]
+  },
+  {
+    id: 2,
+    institution: "Colegio Internacional",
+    degree: "Bachillerato en Ciencias",
+    period: "2018 - 2023",
+    description: "Educación secundaria con enfoque en ciencias",
+    gpa: "3.9",
+    courses: ["Matemáticas Avanzadas", "Física", "Química", "Programación"]
+  }
+];
+
+// Habilidades con niveles
+let skills = [
+  {
+    id: 1,
+    name: "Angular",
+    category: "Frontend",
+    level: "Avanzado",
+    percentage: 85,
+    description: "Framework de desarrollo web"
+  },
+  {
+    id: 2,
+    name: "TypeScript",
+    category: "Lenguaje",
+    level: "Intermedio",
+    percentage: 75,
+    description: "Lenguaje de programación tipado"
+  },
+  {
+    id: 3,
+    name: "JavaScript",
+    category: "Lenguaje",
+    level: "Avanzado",
+    percentage: 90,
+    description: "Lenguaje de programación web"
+  },
+  {
+    id: 4,
+    name: "CSS/SCSS",
+    category: "Frontend",
+    level: "Intermedio",
+    percentage: 70,
+    description: "Estilos y diseño web"
+  },
+  {
+    id: 5,
+    name: "Node.js",
+    category: "Backend",
+    level: "Intermedio",
+    percentage: 65,
+    description: "Runtime de JavaScript para backend"
+  }
+];
+
+// Testimonios/Referencias
+let testimonials = [
+  {
+    id: 1,
+    name: "María González",
+    position: "Tech Lead",
+    company: "Tech Solutions Inc",
+    relationship: "Supervisor directo",
+    testimonial: "Matías es un desarrollador excepcional. Su capacidad para resolver problemas complejos y su dedicación al aprendizaje continuo lo hacen un activo invaluable para cualquier equipo.",
+    rating: 5,
+    contact: "maria.gonzalez@techsolutions.com"
+  },
+  {
+    id: 2,
+    name: "Carlos Rodríguez",
+    position: "Senior Developer",
+    company: "StartupXYZ",
+    relationship: "Colega de trabajo",
+    testimonial: "Trabajar con Matías fue una experiencia increíble. Su pasión por el código limpio y su habilidad para aprender nuevas tecnologías rápidamente son impresionantes.",
+    rating: 5,
+    contact: "carlos.rodriguez@startupxyz.com"
+  },
+  {
+    id: 3,
+    name: "Ana Martínez",
+    position: "Profesora",
+    company: "Universidad Francisco Marroquín",
+    relationship: "Profesora universitaria",
+    testimonial: "Matías es uno de los estudiantes más destacados. Su curiosidad intelectual y su capacidad para aplicar conceptos teóricos en proyectos prácticos son excepcionales.",
+    rating: 5,
+    contact: "ana.martinez@ufm.edu"
+  }
+];
+
+// ========================================
+// RUTAS PRINCIPALES
+// ========================================
+
 app.get('/', (req, res) => {
-  res.send('¡Hola, mundo de mi API!');
+  res.json({
+    message: 'API del CV de Matías Arroyo',
+    version: '1.0.0',
+    endpoints: {
+      experiences: '/experiences',
+      education: '/education', 
+      skills: '/skills',
+      testimonials: '/testimonials'
+    }
+  });
 });
 
-// GET /projects - Ver todos los proyectos
-app.get('/projects', (req, res) => {
-  res.json(projects);
+// ========================================
+// EXPERIENCIAS LABORALES
+// ========================================
+
+// GET /experiences - Ver todas las experiencias
+app.get('/experiences', (req, res) => {
+  res.json(experiences);
 });
 
-// GET /projects/:id - Ver un proyecto específico
-app.get('/projects/:id', (req, res) => {
+// GET /experiences/:id - Ver una experiencia específica
+app.get('/experiences/:id', (req, res) => {
   const id = Number(req.params.id);
-  const project = projects.find(p => p.id === id);
-  
-  if (!project) {
-    return res.status(404).json({ error: 'Proyecto no encontrado' });
+  const experience = experiences.find(e => e.id === id);
+
+  if (!experience) {
+    return res.status(404).json({ error: 'Experiencia no encontrada' });
   }
-  
-  res.json(project);
+
+  res.json(experience);
 });
 
-// POST /projects - Crear un nuevo proyecto
-app.post('/projects', (req, res) => {
-  const { name, stars } = req.body;
-  
-  if (!name) {
-    return res.status(422).json({ error: 'El campo "name" es obligatorio' });
+// POST /experiences - Crear una nueva experiencia
+app.post('/experiences', (req, res) => {
+  const { company, position, period, description, technologies, achievements } = req.body;
+
+  if (!company || !position || !period) {
+    return res.status(422).json({ 
+      error: 'Los campos "company", "position" y "period" son obligatorios' 
+    });
   }
-  
-  const newId = Math.max(0, ...projects.map(p => p.id)) + 1;
-  const newProject = { 
-    id: newId, 
-    name: name, 
-    stars: Number(stars) || 0 
+
+  const newId = Math.max(0, ...experiences.map(e => e.id)) + 1;
+  const newExperience = {
+    id: newId,
+    company,
+    position,
+    period,
+    description: description || '',
+    technologies: technologies || [],
+    achievements: achievements || []
   };
-  
-  projects.push(newProject);
-  res.status(201).json(newProject);
+
+  experiences.push(newExperience);
+  res.status(201).json(newExperience);
 });
 
-// PATCH /projects/:id - Actualizar un proyecto
-app.patch('/projects/:id', (req, res) => {
+// PATCH /experiences/:id - Actualizar una experiencia
+app.patch('/experiences/:id', (req, res) => {
   const id = Number(req.params.id);
-  const project = projects.find(p => p.id === id);
-  
-  if (!project) {
-    return res.status(404).json({ error: 'Proyecto no encontrado' });
+  const experience = experiences.find(e => e.id === id);
+
+  if (!experience) {
+    return res.status(404).json({ error: 'Experiencia no encontrada' });
   }
 
-  const { name, stars } = req.body;
-  
-  if (name !== undefined) project.name = name;
-  if (stars !== undefined) project.stars = Number(stars);
+  const { company, position, period, description, technologies, achievements } = req.body;
 
-  res.json(project);
+  if (company !== undefined) experience.company = company;
+  if (position !== undefined) experience.position = position;
+  if (period !== undefined) experience.period = period;
+  if (description !== undefined) experience.description = description;
+  if (technologies !== undefined) experience.technologies = technologies;
+  if (achievements !== undefined) experience.achievements = achievements;
+
+  res.json(experience);
 });
 
-// DELETE /projects/:id - Eliminar un proyecto
-app.delete('/projects/:id', (req, res) => {
+// DELETE /experiences/:id - Eliminar una experiencia
+app.delete('/experiences/:id', (req, res) => {
   const id = Number(req.params.id);
-  const index = projects.findIndex(p => p.id === id);
-  
+  const index = experiences.findIndex(e => e.id === id);
+
   if (index === -1) {
-    return res.status(404).json({ error: 'Proyecto no encontrado' });
+    return res.status(404).json({ error: 'Experiencia no encontrada' });
   }
-  
-  const deletedProject = projects.splice(index, 1)[0];
-  res.json(deletedProject);
+
+  const deletedExperience = experiences.splice(index, 1)[0];
+  res.json(deletedExperience);
 });
+
+// ========================================
+// EDUCACIÓN
+// ========================================
+
+// GET /education - Ver toda la educación
+app.get('/education', (req, res) => {
+  res.json(education);
+});
+
+// GET /education/:id - Ver una educación específica
+app.get('/education/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const edu = education.find(e => e.id === id);
+
+  if (!edu) {
+    return res.status(404).json({ error: 'Educación no encontrada' });
+  }
+
+  res.json(edu);
+});
+
+// POST /education - Crear una nueva educación
+app.post('/education', (req, res) => {
+  const { institution, degree, period, description, gpa, courses } = req.body;
+
+  if (!institution || !degree || !period) {
+    return res.status(422).json({ 
+      error: 'Los campos "institution", "degree" y "period" son obligatorios' 
+    });
+  }
+
+  const newId = Math.max(0, ...education.map(e => e.id)) + 1;
+  const newEducation = {
+    id: newId,
+    institution,
+    degree,
+    period,
+    description: description || '',
+    gpa: gpa || '',
+    courses: courses || []
+  };
+
+  education.push(newEducation);
+  res.status(201).json(newEducation);
+});
+
+// PATCH /education/:id - Actualizar una educación
+app.patch('/education/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const edu = education.find(e => e.id === id);
+
+  if (!edu) {
+    return res.status(404).json({ error: 'Educación no encontrada' });
+  }
+
+  const { institution, degree, period, description, gpa, courses } = req.body;
+
+  if (institution !== undefined) edu.institution = institution;
+  if (degree !== undefined) edu.degree = degree;
+  if (period !== undefined) edu.period = period;
+  if (description !== undefined) edu.description = description;
+  if (gpa !== undefined) edu.gpa = gpa;
+  if (courses !== undefined) edu.courses = courses;
+
+  res.json(edu);
+});
+
+// DELETE /education/:id - Eliminar una educación
+app.delete('/education/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const index = education.findIndex(e => e.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Educación no encontrada' });
+  }
+
+  const deletedEducation = education.splice(index, 1)[0];
+  res.json(deletedEducation);
+});
+
+// ========================================
+// HABILIDADES
+// ========================================
+
+// GET /skills - Ver todas las habilidades
+app.get('/skills', (req, res) => {
+  res.json(skills);
+});
+
+// GET /skills/:id - Ver una habilidad específica
+app.get('/skills/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const skill = skills.find(s => s.id === id);
+
+  if (!skill) {
+    return res.status(404).json({ error: 'Habilidad no encontrada' });
+  }
+
+  res.json(skill);
+});
+
+// POST /skills - Crear una nueva habilidad
+app.post('/skills', (req, res) => {
+  const { name, category, level, percentage, description } = req.body;
+
+  if (!name || !category || !level) {
+    return res.status(422).json({ 
+      error: 'Los campos "name", "category" y "level" son obligatorios' 
+    });
+  }
+
+  if (percentage < 0 || percentage > 100) {
+    return res.status(422).json({ 
+      error: 'El porcentaje debe estar entre 0 y 100' 
+    });
+  }
+
+  const newId = Math.max(0, ...skills.map(s => s.id)) + 1;
+  const newSkill = {
+    id: newId,
+    name,
+    category,
+    level,
+    percentage: Number(percentage) || 0,
+    description: description || ''
+  };
+
+  skills.push(newSkill);
+  res.status(201).json(newSkill);
+});
+
+// PATCH /skills/:id - Actualizar una habilidad
+app.patch('/skills/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const skill = skills.find(s => s.id === id);
+
+  if (!skill) {
+    return res.status(404).json({ error: 'Habilidad no encontrada' });
+  }
+
+  const { name, category, level, percentage, description } = req.body;
+
+  if (name !== undefined) skill.name = name;
+  if (category !== undefined) skill.category = category;
+  if (level !== undefined) skill.level = level;
+  if (percentage !== undefined) {
+    if (percentage < 0 || percentage > 100) {
+      return res.status(422).json({ 
+        error: 'El porcentaje debe estar entre 0 y 100' 
+      });
+    }
+    skill.percentage = Number(percentage);
+  }
+  if (description !== undefined) skill.description = description;
+
+  res.json(skill);
+});
+
+// DELETE /skills/:id - Eliminar una habilidad
+app.delete('/skills/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const index = skills.findIndex(s => s.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Habilidad no encontrada' });
+  }
+
+  const deletedSkill = skills.splice(index, 1)[0];
+  res.json(deletedSkill);
+});
+
+// ========================================
+// TESTIMONIOS
+// ========================================
+
+// GET /testimonials - Ver todos los testimonios
+app.get('/testimonials', (req, res) => {
+  res.json(testimonials);
+});
+
+// GET /testimonials/:id - Ver un testimonio específico
+app.get('/testimonials/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const testimonial = testimonials.find(t => t.id === id);
+
+  if (!testimonial) {
+    return res.status(404).json({ error: 'Testimonio no encontrado' });
+  }
+
+  res.json(testimonial);
+});
+
+// POST /testimonials - Crear un nuevo testimonio
+app.post('/testimonials', (req, res) => {
+  const { name, position, company, relationship, testimonial, rating, contact } = req.body;
+
+  if (!name || !position || !company || !testimonial) {
+    return res.status(422).json({ 
+      error: 'Los campos "name", "position", "company" y "testimonial" son obligatorios' 
+    });
+  }
+
+  if (rating < 1 || rating > 5) {
+    return res.status(422).json({ 
+      error: 'El rating debe estar entre 1 y 5' 
+    });
+  }
+
+  const newId = Math.max(0, ...testimonials.map(t => t.id)) + 1;
+  const newTestimonial = {
+    id: newId,
+    name,
+    position,
+    company,
+    relationship: relationship || '',
+    testimonial,
+    rating: Number(rating) || 5,
+    contact: contact || ''
+  };
+
+  testimonials.push(newTestimonial);
+  res.status(201).json(newTestimonial);
+});
+
+// PATCH /testimonials/:id - Actualizar un testimonio
+app.patch('/testimonials/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const testimonial = testimonials.find(t => t.id === id);
+
+  if (!testimonial) {
+    return res.status(404).json({ error: 'Testimonio no encontrado' });
+  }
+
+  const { name, position, company, relationship, testimonial: testimonialText, rating, contact } = req.body;
+
+  if (name !== undefined) testimonial.name = name;
+  if (position !== undefined) testimonial.position = position;
+  if (company !== undefined) testimonial.company = company;
+  if (relationship !== undefined) testimonial.relationship = relationship;
+  if (testimonialText !== undefined) testimonial.testimonial = testimonialText;
+  if (rating !== undefined) {
+    if (rating < 1 || rating > 5) {
+      return res.status(422).json({ 
+        error: 'El rating debe estar entre 1 y 5' 
+      });
+    }
+    testimonial.rating = Number(rating);
+  }
+  if (contact !== undefined) testimonial.contact = contact;
+
+  res.json(testimonial);
+});
+
+// DELETE /testimonials/:id - Eliminar un testimonio
+app.delete('/testimonials/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const index = testimonials.findIndex(t => t.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Testimonio no encontrado' });
+  }
+
+  const deletedTestimonial = testimonials.splice(index, 1)[0];
+  res.json(deletedTestimonial);
+});
+
+// ========================================
+// MANEJO DE ERRORES
+// ========================================
+
+// Ruta no encontrada (404)
+app.use((req, res) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+
+// ========================================
+// INICIAR SERVIDOR
+// ========================================
 
 app.listen(PORT, () => {
-  console.log(`🚀 API escuchando en http://localhost:${PORT}`);
+  console.log(`🚀 API del CV escuchando en http://localhost:${PORT}`);
   console.log(`📋 Endpoints disponibles:`);
-  console.log(`   GET    /projects     - Ver todos los proyectos`);
-  console.log(`   GET    /projects/:id - Ver un proyecto específico`);
-  console.log(`   POST   /projects     - Crear un nuevo proyecto`);
-  console.log(`   PATCH  /projects/:id - Actualizar un proyecto`);
-  console.log(`   DELETE /projects/:id - Eliminar un proyecto`);
+  console.log(`   GET    /                    - Información de la API`);
+  console.log(`   GET    /experiences         - Ver todas las experiencias`);
+  console.log(`   GET    /experiences/:id     - Ver una experiencia específica`);
+  console.log(`   POST   /experiences         - Crear una nueva experiencia`);
+  console.log(`   PATCH  /experiences/:id    - Actualizar una experiencia`);
+  console.log(`   DELETE /experiences/:id    - Eliminar una experiencia`);
+  console.log(`   GET    /education          - Ver toda la educación`);
+  console.log(`   GET    /education/:id     - Ver una educación específica`);
+  console.log(`   POST   /education         - Crear una nueva educación`);
+  console.log(`   PATCH  /education/:id    - Actualizar una educación`);
+  console.log(`   DELETE /education/:id    - Eliminar una educación`);
+  console.log(`   GET    /skills            - Ver todas las habilidades`);
+  console.log(`   GET    /skills/:id        - Ver una habilidad específica`);
+  console.log(`   POST   /skills            - Crear una nueva habilidad`);
+  console.log(`   PATCH  /skills/:id        - Actualizar una habilidad`);
+  console.log(`   DELETE /skills/:id        - Eliminar una habilidad`);
+  console.log(`   GET    /testimonials      - Ver todos los testimonios`);
+  console.log(`   GET    /testimonials/:id - Ver un testimonio específico`);
+  console.log(`   POST   /testimonials      - Crear un nuevo testimonio`);
+  console.log(`   PATCH  /testimonials/:id - Actualizar un testimonio`);
+  console.log(`   DELETE /testimonials/:id - Eliminar un testimonio`);
 });
