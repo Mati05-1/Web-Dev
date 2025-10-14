@@ -15,6 +15,42 @@
       </div>
     </div>
 
+    <!-- API Status -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card api-status-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-cloud-arrow-down me-2"></i>
+              Datos desde API REST
+            </h3>
+            <div *ngIf="loading" class="loading-state">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2">Cargando experiencias desde la API...</p>
+            </div>
+            <div *ngIf="error" class="error-state">
+              <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+              {{ error }}
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Reintentar
+              </button>
+            </div>
+            <div *ngIf="!loading && !error && apiExperiences.length > 0" class="success-state">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              {{ apiExperiences.length }} experiencias cargadas desde la API
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Basic Jobs from Service -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-8">
@@ -39,8 +75,58 @@
       </div>
     </div>
 
-    <!-- Jobs List -->
-    <div class="row justify-content-center">
+    <!-- API Experiences List -->
+    <div class="row justify-content-center mb-4" *ngIf="!loading && !error && apiExperiences.length > 0">
+      <div class="col-12 col-lg-10">
+        <div class="jobs-list">
+          <div *ngFor="let experience of apiExperiences; let i = index" 
+               class="job-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Job Header -->
+            <div class="job-header">
+              <div class="job-period">{{ experience.period }}</div>
+              <div class="job-company">{{ experience.company | reverse }}</div>
+              <div class="job-position">{{ experience.position }}</div>
+            </div>
+
+            <!-- Job Description -->
+            <div class="job-description">
+              <p>{{ experience.description }}</p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="job-responsibilities" *ngIf="experience.achievements && experience.achievements.length > 0">
+              <h5 class="responsibilities-title">
+                <i class="bi bi-trophy-fill me-2"></i>
+                Logros Principales
+              </h5>
+              <ul class="responsibilities-list">
+                <li *ngFor="let achievement of experience.achievements">
+                  {{ achievement }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- Technologies -->
+            <div class="job-technologies" *ngIf="experience.technologies && experience.technologies.length > 0">
+              <h5 class="technologies-title">
+                <i class="bi bi-gear-fill me-2"></i>
+                Tecnologías Utilizadas
+              </h5>
+              <div class="technologies-tags">
+                <span *ngFor="let tech of experience.technologies" class="tech-tag">
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static Jobs List (Fallback) -->
+    <div class="row justify-content-center" *ngIf="loading || error">
       <div class="col-12 col-lg-10">
         <div class="jobs-list">
           <div *ngFor="let job of jobs; let i = index" 

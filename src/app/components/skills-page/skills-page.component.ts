@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SkillsComponent, Skill } from '../skills/skills.component';
 import { DataService } from '../../data.service';
+import { ApiService, Skill as ApiSkill } from '../../services/api.service';
 
 interface MemoryCard {
   value: string;
@@ -22,6 +23,11 @@ export class SkillsPageComponent implements OnInit, OnDestroy {
   languages: Skill[] = [];
   softSkills: Skill[] = [];
   basicSkills: string[] = [];
+  
+  // Datos de habilidades desde la API
+  apiSkills: ApiSkill[] = [];
+  loading = true;
+  error: string | null = null;
 
   // Game variables
   gameStarted = false;
@@ -37,7 +43,10 @@ export class SkillsPageComponent implements OnInit, OnDestroy {
   // Card values
   cardValues = ['🎮', '🎯', '🎲', '🎪', '🎨', '🎵', '🎸', '🎺'];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
     // Load high score from localStorage
@@ -48,6 +57,31 @@ export class SkillsPageComponent implements OnInit, OnDestroy {
     this.languages = this.dataService.getLanguages();
     this.softSkills = this.dataService.getSoftSkills();
     this.basicSkills = this.dataService.getSkills();
+    
+    // Load skills from API
+    this.loadSkillsFromAPI();
+  }
+
+  loadSkillsFromAPI() {
+    this.loading = true;
+    this.error = null;
+    
+    this.apiService.getSkills().subscribe({
+      next: (skills) => {
+        this.apiSkills = skills;
+        this.loading = false;
+        console.log('Skills loaded from API:', skills);
+      },
+      error: (error) => {
+        this.error = 'Error al cargar habilidades desde la API';
+        this.loading = false;
+        console.error('Error loading skills:', error);
+      }
+    });
+  }
+
+  refreshData() {
+    this.loadSkillsFromAPI();
   }
 
   ngOnDestroy() {

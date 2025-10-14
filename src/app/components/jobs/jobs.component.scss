@@ -30,6 +30,56 @@
   font-style: italic;
 }
 
+.api-status-card {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 0.1) 0%, rgba(45, 253, 255, 0.05) 100%);
+  border: 1px solid rgba(34, 193, 195, 0.2);
+  border-radius: var(--radius);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: fadeInUp 1.2s ease-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(34, 193, 195, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.loading-state {
+  padding: 1rem 0;
+  
+  .spinner-border {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  p {
+    color: var(--fg);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.error-state {
+  padding: 1rem 0;
+  color: var(--fg);
+  font-size: 0.9rem;
+  
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+.success-state {
+  padding: 1rem 0;
+  color: var(--fg);
+  font-size: 0.9rem;
+  
+  i {
+    font-size: 1.2rem;
+  }
+}
+
 .basic-jobs-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);

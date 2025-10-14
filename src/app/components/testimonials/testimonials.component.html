@@ -1,0 +1,115 @@
+<div class="testimonials-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h2 class="page-title">
+            <i class="bi bi-quote me-2"></i>
+            Testimonios y Referencias
+          </h2>
+          <p class="page-subtitle">
+            Lo que dicen sobre mi trabajo
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Status -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card api-status-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-cloud-arrow-down me-2"></i>
+              Datos desde API REST
+            </h3>
+            <div *ngIf="loading" class="loading-state">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2">Cargando testimonios desde la API...</p>
+            </div>
+            <div *ngIf="error" class="error-state">
+              <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+              {{ error }}
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Reintentar
+              </button>
+            </div>
+            <div *ngIf="!loading && !error && testimonials.length > 0" class="success-state">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              {{ testimonials.length }} testimonios cargados desde la API
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials List -->
+    <div class="row justify-content-center" *ngIf="!loading && !error && testimonials.length > 0">
+      <div class="col-12 col-lg-10">
+        <div class="testimonials-grid">
+          <div *ngFor="let testimonial of testimonials; let i = index" 
+               class="testimonial-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Quote Icon -->
+            <div class="quote-icon">
+              <i class="bi bi-quote"></i>
+            </div>
+            
+            <!-- Testimonial Content -->
+            <div class="testimonial-content">
+              <p class="testimonial-text">{{ testimonial.testimonial }}</p>
+            </div>
+            
+            <!-- Rating -->
+            <div class="testimonial-rating">
+              <div class="stars">
+                <span *ngFor="let star of getStars(testimonial.rating)" class="star filled">★</span>
+                <span *ngFor="let star of getEmptyStars(testimonial.rating)" class="star empty">☆</span>
+              </div>
+            </div>
+            
+            <!-- Author Info -->
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4 class="author-name">{{ testimonial.name }}</h4>
+                <p class="author-position">{{ testimonial.position }}</p>
+                <p class="author-company">{{ testimonial.company }}</p>
+                <p class="author-relationship">{{ testimonial.relationship }}</p>
+              </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="testimonial-contact" *ngIf="testimonial.contact">
+              <i class="bi bi-envelope me-1"></i>
+              <a [href]="'mailto:' + testimonial.contact" class="contact-link">
+                {{ testimonial.contact }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="row justify-content-center" *ngIf="!loading && !error && testimonials.length === 0">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card empty-state-card">
+          <div class="card-body text-center">
+            <i class="bi bi-chat-quote text-muted" style="font-size: 3rem;"></i>
+            <h3 class="mt-3">No hay testimonios disponibles</h3>
+            <p class="text-muted">Los testimonios se cargarán desde la API cuando estén disponibles.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

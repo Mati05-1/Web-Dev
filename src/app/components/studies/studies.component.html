@@ -15,8 +15,90 @@
       </div>
     </div>
 
-    <!-- Studies List -->
-    <div class="row justify-content-center">
+    <!-- API Status -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card api-status-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-cloud-arrow-down me-2"></i>
+              Datos desde API REST
+            </h3>
+            <div *ngIf="loading" class="loading-state">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2">Cargando educación desde la API...</p>
+            </div>
+            <div *ngIf="error" class="error-state">
+              <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+              {{ error }}
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Reintentar
+              </button>
+            </div>
+            <div *ngIf="!loading && !error && apiEducation.length > 0" class="success-state">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              {{ apiEducation.length }} instituciones educativas cargadas desde la API
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Education List -->
+    <div class="row justify-content-center mb-4" *ngIf="!loading && !error && apiEducation.length > 0">
+      <div class="col-12 col-lg-10">
+        <div class="studies-list">
+          <div *ngFor="let education of apiEducation; let i = index" 
+               class="study-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Study Header -->
+            <div class="study-header">
+              <div class="study-period">{{ education.period }}</div>
+              <div class="study-institution">{{ education.institution | reverse }}</div>
+              <div class="study-title">{{ education.degree }}</div>
+            </div>
+
+            <!-- Study Description -->
+            <div class="study-description">
+              <p>{{ education.description }}</p>
+            </div>
+
+            <!-- GPA -->
+            <div class="study-gpa" *ngIf="education.gpa">
+              <h5 class="gpa-title">
+                <i class="bi bi-star-fill me-2"></i>
+                Promedio Académico
+              </h5>
+              <div class="gpa-value">{{ education.gpa }}</div>
+            </div>
+
+            <!-- Courses -->
+            <div class="study-skills" *ngIf="education.courses && education.courses.length > 0">
+              <h5 class="skills-title">
+                <i class="bi bi-book-fill me-2"></i>
+                Cursos Principales
+              </h5>
+              <div class="skills-tags">
+                <span *ngFor="let course of education.courses" class="skill-tag">
+                  {{ course }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static Studies List (Fallback) -->
+    <div class="row justify-content-center" *ngIf="loading || error">
       <div class="col-12 col-lg-10">
         <div class="studies-list">
           <div *ngFor="let study of studies; let i = index" 

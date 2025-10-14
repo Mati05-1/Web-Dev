@@ -15,8 +15,79 @@
       </div>
     </div>
 
-    <!-- Skills Component -->
-    <div class="row justify-content-center">
+    <!-- API Status -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card api-status-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-cloud-arrow-down me-2"></i>
+              Datos desde API REST
+            </h3>
+            <div *ngIf="loading" class="loading-state">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2">Cargando habilidades desde la API...</p>
+            </div>
+            <div *ngIf="error" class="error-state">
+              <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+              {{ error }}
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Reintentar
+              </button>
+            </div>
+            <div *ngIf="!loading && !error && apiSkills.length > 0" class="success-state">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              {{ apiSkills.length }} habilidades cargadas desde la API
+              <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Skills List -->
+    <div class="row justify-content-center mb-4" *ngIf="!loading && !error && apiSkills.length > 0">
+      <div class="col-12 col-lg-10">
+        <div class="api-skills-wrapper">
+          <h3 class="api-skills-title">
+            <i class="bi bi-star-fill me-2"></i>
+            Habilidades desde API REST
+          </h3>
+          <div class="api-skills-grid">
+            <div *ngFor="let skill of apiSkills; let i = index" 
+                 class="api-skill-card"
+                 [style.animation-delay]="(i * 0.1) + 's'">
+              
+              <div class="skill-header">
+                <h4 class="skill-name">{{ skill.name }}</h4>
+                <div class="skill-category-badge">{{ skill.category }}</div>
+              </div>
+              
+              <div class="skill-level">
+                <div class="level-label">{{ skill.level }}</div>
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="skill.percentage"></div>
+                </div>
+                <div class="percentage">{{ skill.percentage }}%</div>
+              </div>
+              
+              <div class="skill-description">
+                <p>{{ skill.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Component (Static Fallback) -->
+    <div class="row justify-content-center" *ngIf="loading || error">
       <div class="col-12 col-lg-10">
         <div class="skills-wrapper">
           <app-skills 

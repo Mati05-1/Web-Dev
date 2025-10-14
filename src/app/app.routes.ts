@@ -6,6 +6,7 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { StudiesComponent } from './components/studies/studies.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SportsComponent } from './components/sports/sports.component';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/about', pathMatch: 'full' },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'skills', component: SkillsPageComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'sports', component: SportsComponent },
+  { path: 'testimonials', component: TestimonialsComponent },
   { 
     path: 'experience', 
     component: ExperiencePageComponent,
