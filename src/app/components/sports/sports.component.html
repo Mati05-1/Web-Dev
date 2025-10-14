@@ -1,0 +1,266 @@
+<div class="sports-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h1 class="page-title">
+            <i class="bi bi-basketball me-3"></i>
+            NBA Sports Center
+          </h1>
+          <p class="page-subtitle">
+            Estadísticas en tiempo real de la NBA - Jugadores, equipos y juegos recientes
+          </p>
+          <div class="last-updated" *ngIf="lastUpdated && !loadingPlayers && !loadingTeams && !loadingGames">
+            <small class="text-muted">
+              <i class="bi bi-clock me-1"></i>
+              Última actualización: {{ lastUpdated }}
+            </small>
+          </div>
+          <div class="refresh-button mt-3">
+            <button class="btn btn-outline-primary" (click)="refreshData()">
+              <i class="bi bi-arrow-clockwise me-2"></i>
+              Actualizar Datos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teams Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="bi bi-trophy-fill me-2"></i>
+            Equipos de la NBA
+          </h2>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="row justify-content-center" *ngIf="loadingTeams">
+          <div class="col-12 text-center">
+            <div class="loading-card">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando equipos...</span>
+              </div>
+              <p class="mt-3">Cargando equipos de la NBA...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="row justify-content-center" *ngIf="errorTeams">
+          <div class="col-12 text-center">
+            <div class="error-card">
+              <i class="bi bi-exclamation-triangle-fill text-warning mb-3" style="font-size: 2rem;"></i>
+              <h5>{{ errorTeams }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teams Grid -->
+        <div class="row" *ngIf="!loadingTeams && !errorTeams">
+          <!-- Eastern Conference -->
+          <div class="col-12 col-lg-6 mb-4">
+            <div class="conference-section">
+              <h4 class="conference-title east">
+                <i class="bi bi-sun me-2"></i>
+                Conferencia Este
+              </h4>
+              <div class="teams-grid">
+                <div *ngFor="let team of getEasternConferenceTeams()" 
+                     class="team-card"
+                     [style.border-left-color]="getTeamColor(team.abbreviation)">
+                  <div class="team-info">
+                    <div class="team-abbreviation">{{ team.abbreviation }}</div>
+                    <div class="team-name">{{ team.name }}</div>
+                    <div class="team-city">{{ team.city }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Western Conference -->
+          <div class="col-12 col-lg-6 mb-4">
+            <div class="conference-section">
+              <h4 class="conference-title west">
+                <i class="bi bi-moon me-2"></i>
+                Conferencia Oeste
+              </h4>
+              <div class="teams-grid">
+                <div *ngFor="let team of getWesternConferenceTeams()" 
+                     class="team-card"
+                     [style.border-left-color]="getTeamColor(team.abbreviation)">
+                  <div class="team-info">
+                    <div class="team-abbreviation">{{ team.abbreviation }}</div>
+                    <div class="team-name">{{ team.name }}</div>
+                    <div class="team-city">{{ team.city }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Players Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="bi bi-person-fill me-2"></i>
+            Jugadores Destacados
+          </h2>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="row justify-content-center" *ngIf="loadingPlayers">
+          <div class="col-12 text-center">
+            <div class="loading-card">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando jugadores...</span>
+              </div>
+              <p class="mt-3">Cargando jugadores de la NBA...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="row justify-content-center" *ngIf="errorPlayers">
+          <div class="col-12 text-center">
+            <div class="error-card">
+              <i class="bi bi-exclamation-triangle-fill text-warning mb-3" style="font-size: 2rem;"></i>
+              <h5>{{ errorPlayers }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Players Grid -->
+        <div class="row" *ngIf="!loadingPlayers && !errorPlayers">
+          <div *ngFor="let player of players" 
+               class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="player-card">
+              <div class="player-header">
+                <div class="player-name">{{ player.first_name }} {{ player.last_name }}</div>
+                <div class="player-position">{{ player.position }}</div>
+              </div>
+              
+              <div class="player-team">
+                <div class="team-badge" [style.background-color]="getTeamColor(player.team.abbreviation)">
+                  {{ player.team.abbreviation }}
+                </div>
+                <div class="team-name">{{ player.team.full_name }}</div>
+              </div>
+              
+              <div class="player-stats">
+                <div class="stat-item">
+                  <i class="bi bi-rulers me-1"></i>
+                  <span>{{ formatHeight(player.height_feet, player.height_inches) }}</span>
+                </div>
+                <div class="stat-item">
+                  <i class="bi bi-speedometer me-1"></i>
+                  <span>{{ formatWeight(player.weight_pounds) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="row justify-content-center" *ngIf="!loadingPlayers && !errorPlayers && players.length > 0">
+          <div class="col-12 text-center">
+            <button class="btn btn-primary" (click)="loadMorePlayers()">
+              <i class="bi bi-plus-circle me-2"></i>
+              Cargar Más Jugadores
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Games Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="bi bi-calendar-event me-2"></i>
+            Juegos Recientes
+          </h2>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="row justify-content-center" *ngIf="loadingGames">
+          <div class="col-12 text-center">
+            <div class="loading-card">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando juegos...</span>
+              </div>
+              <p class="mt-3">Cargando juegos recientes...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="row justify-content-center" *ngIf="errorGames">
+          <div class="col-12 text-center">
+            <div class="error-card">
+              <i class="bi bi-exclamation-triangle-fill text-warning mb-3" style="font-size: 2rem;"></i>
+              <h5>{{ errorGames }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Games List -->
+        <div class="row" *ngIf="!loadingGames && !errorGames">
+          <div *ngFor="let game of recentGames" 
+               class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="game-card">
+              <div class="game-header">
+                <div class="game-date">{{ formatGameDate(game.date) }}</div>
+                <div class="game-status">{{ game.status }}</div>
+              </div>
+              
+              <div class="game-teams">
+                <div class="team-score">
+                  <div class="team-info">
+                    <div class="team-name">{{ game.visitor_team.name }}</div>
+                    <div class="team-abbreviation">{{ game.visitor_team.abbreviation }}</div>
+                  </div>
+                  <div class="score">{{ game.visitor_team_score }}</div>
+                </div>
+                
+                <div class="vs-divider">VS</div>
+                
+                <div class="team-score">
+                  <div class="team-info">
+                    <div class="team-name">{{ game.home_team.name }}</div>
+                    <div class="team-abbreviation">{{ game.home_team.abbreviation }}</div>
+                  </div>
+                  <div class="score">{{ game.home_team_score }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Info -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 text-center">
+        <div class="api-info-card">
+          <p class="mb-2">
+            <i class="bi bi-info-circle me-2"></i>
+            Datos proporcionados por Ball Don't Lie API
+          </p>
+          <small class="text-muted">
+            Información actualizada de la NBA en tiempo real
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

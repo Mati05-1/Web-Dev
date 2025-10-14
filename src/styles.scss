@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Import Bootstrap
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons.css';
 
 // CV Styles
 * { box-sizing: border-box; margin: 0; padding: 0; }

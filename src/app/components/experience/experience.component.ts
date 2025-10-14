@@ -5,6 +5,8 @@ export interface ExperienceRecord {
   period: string;
   company: string;
   position: string;
+  description?: string;
+  responsibilities?: string[];
 }
 
 @Component({

@@ -1,0 +1,128 @@
+<div class="skills-page-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="page-header">
+          <h1 class="page-title">
+            <i class="bi bi-gear-fill me-3"></i>
+            {{ 'Habilidades y Competencias' | uppercase }}
+          </h1>
+          <p class="page-subtitle">
+            Conoce las tecnologías, lenguajes de programación y habilidades blandas que he desarrollado
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Component -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="skills-wrapper">
+          <app-skills 
+            [technologies]="technologies"
+            [languages]="languages"
+            [softSkills]="softSkills">
+          </app-skills>
+        </div>
+      </div>
+    </div>
+
+    <!-- Basic Skills from Service -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card basic-skills-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-code-slash me-2"></i>
+              Habilidades Principales
+            </h3>
+            <div class="basic-skills-list">
+              <div class="skill-category">
+                <h5>Tecnologías Clave</h5>
+                <div class="skill-tags">
+                  <span *ngFor="let skill of basicSkills" class="skill-tag">
+                    {{ skill }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini Game Section -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-lg-8">
+        <div class="card my-card mini-game-card">
+          <div class="card-body text-center">
+            <h3 class="card-title">
+              <i class="bi bi-controller me-2"></i>
+              ¡Juego de Memoria!
+            </h3>
+            <p class="card-text">
+              Haz clic en las cartas para encontrar los pares. 
+              ¡Ve cuántos pares puedes encontrar!
+            </p>
+            
+            <!-- Game Container -->
+            <div class="game-container">
+              
+              <!-- Score -->
+              <div class="score-display">
+                <span class="score">Puntuación: {{ score }}</span>
+                <span class="high-score" *ngIf="highScore > 0">Mejor: {{ highScore }}</span>
+              </div>
+              
+              <!-- Cards Grid -->
+              <div class="cards-grid">
+                <div *ngFor="let card of cards; let i = index" 
+                     class="memory-card"
+                     [class.flipped]="card.flipped"
+                     [class.matched]="card.matched"
+                     (click)="flipCard(i)">
+                  <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back">{{ card.value }}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Game Over Screen -->
+              <div class="game-over" *ngIf="gameWon">
+                <h4>¡Felicitaciones! 🎉</h4>
+                <p>¡Encontraste todos los pares!</p>
+                <p>Puntuación: {{ score }}</p>
+                <button class="btn btn-primary" (click)="restartGame()">
+                  <i class="bi bi-arrow-clockwise me-2"></i>
+                  Jugar de Nuevo
+                </button>
+              </div>
+              
+              <!-- Start Screen -->
+              <div class="start-screen" *ngIf="!gameStarted">
+                <h4>¡Haz clic para empezar!</h4>
+                <p>Encuentra todos los pares de cartas</p>
+                <button class="btn btn-primary" (click)="startGame()">
+                  <i class="bi bi-play-fill me-2"></i>
+                  Empezar Juego
+                </button>
+              </div>
+            </div>
+            
+            <!-- Game Instructions -->
+            <div class="game-instructions mt-3">
+              <small class="text-muted">
+                <i class="bi bi-mouse me-1"></i>
+                Click = Voltear carta | 
+                <i class="bi bi-lightbulb me-1"></i>
+                Memoria = Ganar
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

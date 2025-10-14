@@ -1,0 +1,54 @@
+<div class="about-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-8 text-center">
+        <div class="profile-header">
+          <img src="assets/images/foto-principal.jpg" 
+               alt="Matías Arroyo" 
+               class="profile-image mb-4">
+          <h1 class="profile-name">{{ personalInfo.name }}</h1>
+          <h2 class="profile-title">{{ personalInfo.title }}</h2>
+          <p class="profile-university">{{ personalInfo.university }} - {{ personalInfo.period }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Biography Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-10">
+        <div class="card my-card biography-card">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-person-fill me-2"></i>
+              Biografía
+            </h3>
+            <p class="biography-text">{{ personalInfo.description }}</p>
+            <p class="goals-text">{{ personalInfo.goals }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interests Section -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="card my-card interests-card">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-heart-fill me-2"></i>
+              Intereses
+            </h3>
+            <div class="interests-grid">
+              <div *ngFor="let interest of personalInfo.interests" 
+                   class="interest-item">
+                <i class="bi bi-star-fill me-2"></i>
+                {{ interest }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
