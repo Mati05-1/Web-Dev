@@ -1,15 +1,15 @@
-<div class="testimonials-container">
+<div class="education-certificates-container">
   <div class="container">
     <!-- Header Section -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-8 text-center">
         <div class="page-header">
           <h2 class="page-title">
-            <i class="bi bi-quote me-2"></i>
-            Testimonios y Referencias
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            Educación y Certificados
           </h2>
           <p class="page-subtitle">
-            Lo que dicen sobre mi trabajo
+            Mi formación académica y certificaciones profesionales
           </p>
         </div>
       </div>
@@ -28,7 +28,7 @@
               <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Cargando...</span>
               </div>
-              <p class="mt-2">Cargando testimonios desde la API...</p>
+              <p class="mt-2">Cargando educación desde la API...</p>
             </div>
             <div *ngIf="error" class="error-state">
               <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
@@ -38,9 +38,9 @@
                 Reintentar
               </button>
             </div>
-            <div *ngIf="!loading && !error && testimonials.length > 0" class="success-state">
+            <div *ngIf="!loading && !error && education.length > 0" class="success-state">
               <i class="bi bi-check-circle-fill text-success me-2"></i>
-              {{ testimonials.length }} testimonios cargados desde la API
+              {{ education.length }} instituciones educativas cargadas desde la API
               <button class="btn btn-outline-primary btn-sm ms-2" (click)="refreshData()">
                 <i class="bi bi-arrow-clockwise me-1"></i>
                 Actualizar
@@ -51,62 +51,105 @@
       </div>
     </div>
 
-    <!-- Testimonials List -->
-    <div class="row justify-content-center" *ngIf="!loading && !error && testimonials.length > 0">
+    <!-- Education Section -->
+    <div class="row justify-content-center mb-5">
       <div class="col-12 col-lg-10">
-        <div class="testimonials-grid">
-          <div *ngFor="let testimonial of testimonials; let i = index" 
-               class="testimonial-card"
-               [style.animation-delay]="(i * 0.1) + 's'">
-            
-            <!-- Quote Icon -->
-            <div class="quote-icon">
-              <i class="bi bi-quote"></i>
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="bi bi-graduation-cap me-2"></i>
+            Formación Académica
+          </h3>
+        </div>
+        
+        <!-- Static Education Data -->
+        <div class="education-list">
+          <div class="education-card">
+            <div class="education-header">
+              <div class="education-period">2018 - 2023</div>
+              <div class="education-institution">Colegio Valle Verde</div>
+              <div class="education-degree">Bachiller en Ciencias y Letras</div>
             </div>
-            
-            <!-- Testimonial Content -->
-            <div class="testimonial-content">
-              <p class="testimonial-text">{{ testimonial.testimonial }}</p>
+            <div class="education-description">
+              <p>Educación secundaria completa con enfoque en ciencias y letras, desarrollando habilidades fundamentales en matemáticas, ciencias naturales, literatura y ciencias sociales.</p>
             </div>
-            
-            <!-- Rating -->
-            <div class="testimonial-rating">
-              <div class="stars">
-                <span *ngFor="let star of getStars(testimonial.rating)" class="star filled">★</span>
-                <span *ngFor="let star of getEmptyStars(testimonial.rating)" class="star empty">☆</span>
-              </div>
+            <div class="education-achievements">
+              <h5 class="achievements-title">
+                <i class="bi bi-trophy-fill me-2"></i>
+                Logros Destacados
+              </h5>
+              <ul class="achievements-list">
+                <li>Promedio académico sobresaliente</li>
+                <li>Participación en competencias de matemáticas</li>
+                <li>Liderazgo estudiantil</li>
+              </ul>
             </div>
-            
-            <!-- Author Info -->
-            <div class="testimonial-author">
-              <div class="author-info">
-                <h4 class="author-name">{{ testimonial.name }}</h4>
-                <p class="author-position">{{ testimonial.position }}</p>
-                <p class="author-company">{{ testimonial.company }}</p>
-                <p class="author-relationship">{{ testimonial.relationship }}</p>
-              </div>
+          </div>
+
+          <div class="education-card">
+            <div class="education-header">
+              <div class="education-period">2024 - 2027</div>
+              <div class="education-institution">Universidad Francisco Marroquín</div>
+              <div class="education-degree">Computer Science</div>
             </div>
-            
-            <!-- Contact Info -->
-            <div class="testimonial-contact" *ngIf="testimonial.contact">
-              <i class="bi bi-envelope me-1"></i>
-              <a [href]="'mailto:' + testimonial.contact" class="contact-link">
-                {{ testimonial.contact }}
-              </a>
+            <div class="education-description">
+              <p>Estudiante de Ciencias de la Computación en una de las universidades más prestigiosas de Guatemala, enfocándome en desarrollo de software, algoritmos y tecnologías emergentes.</p>
+            </div>
+            <div class="education-achievements">
+              <h5 class="achievements-title">
+                <i class="bi bi-code-slash me-2"></i>
+                Áreas de Estudio
+              </h5>
+              <ul class="achievements-list">
+                <li>Programación y Algoritmos</li>
+                <li>Estructuras de Datos</li>
+                <li>Desarrollo Web</li>
+                <li>Base de Datos</li>
+                <li>Inteligencia Artificial</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div class="row justify-content-center" *ngIf="!loading && !error && testimonials.length === 0">
-      <div class="col-12 col-lg-8">
-        <div class="card my-card empty-state-card">
-          <div class="card-body text-center">
-            <i class="bi bi-chat-quote text-muted" style="font-size: 3rem;"></i>
-            <h3 class="mt-3">No hay testimonios disponibles</h3>
-            <p class="text-muted">Los testimonios se cargarán desde la API cuando estén disponibles.</p>
+    <!-- Certificates Section -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="bi bi-award-fill me-2"></i>
+            Certificaciones Profesionales
+          </h3>
+        </div>
+        
+        <div class="certificates-grid">
+          <div *ngFor="let certificate of certificates; let i = index" 
+               class="certificate-card"
+               [style.animation-delay]="(i * 0.1) + 's'">
+            
+            <!-- Certificate Header -->
+            <div class="certificate-header">
+              <div class="certificate-date">{{ certificate.date }}</div>
+              <div class="certificate-institution">{{ certificate.institution }}</div>
+              <div class="certificate-name">{{ certificate.name }}</div>
+            </div>
+            
+            <!-- Certificate Description -->
+            <div class="certificate-description">
+              <p>{{ certificate.description }}</p>
+            </div>
+            
+            <!-- Credential ID -->
+            <div class="certificate-credential" *ngIf="certificate.credentialId">
+              <i class="bi bi-shield-check me-1"></i>
+              <span class="credential-id">ID: {{ certificate.credentialId }}</span>
+            </div>
+            
+            <!-- Certificate Badge -->
+            <div class="certificate-badge">
+              <i class="bi bi-patch-check-fill"></i>
+              <span>Certificado</span>
+            </div>
           </div>
         </div>
       </div>

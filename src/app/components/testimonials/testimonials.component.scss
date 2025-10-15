@@ -1,5 +1,5 @@
-/* Testimonials Component Styles */
-.testimonials-container {
+/* Education and Certificates Component Styles */
+.education-certificates-container {
   padding: 2rem 0;
   animation: fadeInUp 0.8s ease-out;
 }
@@ -80,13 +80,130 @@
   }
 }
 
-.testimonials-grid {
+.section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-title {
+  color: var(--accent-2);
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  i {
+    color: var(--accent);
+    font-size: 1.5rem;
+  }
+}
+
+/* Education Styles */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.education-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: slideInUp 0.6s ease-out both;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+}
+
+.education-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  
+  .education-period {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .education-institution {
+    color: var(--accent-2);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .education-degree {
+    color: var(--fg);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+}
+
+.education-description {
+  margin-bottom: 1.5rem;
+  
+  p {
+    color: var(--fg);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.education-achievements {
+  .achievements-title {
+    color: var(--accent-2);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    
+    i {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+  }
+  
+  .achievements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      color: var(--fg);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+      
+      &:before {
+        content: '✓';
+        color: var(--accent);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+/* Certificates Styles */
+.certificates-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
 }
 
-.testimonial-card {
+.certificate-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
@@ -103,121 +220,73 @@
   }
 }
 
-.quote-icon {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: var(--accent);
-  font-size: 2rem;
-  opacity: 0.3;
-}
-
-.testimonial-content {
+.certificate-header {
   margin-bottom: 1.5rem;
+  text-align: center;
   
-  .testimonial-text {
-    color: var(--fg);
+  .certificate-date {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .certificate-institution {
+    color: var(--accent-2);
+    font-weight: 700;
     font-size: 1.1rem;
-    line-height: 1.8;
-    font-style: italic;
-    margin: 0;
-    padding-right: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .certificate-name {
+    color: var(--fg);
+    font-weight: 600;
+    font-size: 1.2rem;
   }
 }
 
-.testimonial-rating {
+.certificate-description {
   margin-bottom: 1.5rem;
-  text-align: center;
   
-  .stars {
-    display: flex;
-    justify-content: center;
-    gap: 0.25rem;
-    
-    .star {
-      font-size: 1.2rem;
-      
-      &.filled {
-        color: #ffd700;
-      }
-      
-      &.empty {
-        color: var(--muted);
-      }
-    }
+  p {
+    color: var(--fg);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
   }
 }
 
-.testimonial-author {
+.certificate-credential {
   margin-bottom: 1rem;
-  
-  .author-info {
-    text-align: center;
-    
-    .author-name {
-      color: var(--accent-2);
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 0.25rem;
-    }
-    
-    .author-position {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-    }
-    
-    .author-company {
-      color: var(--fg);
-      font-weight: 500;
-      font-size: 0.95rem;
-      margin-bottom: 0.25rem;
-    }
-    
-    .author-relationship {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-style: italic;
-    }
-  }
-}
-
-.testimonial-contact {
   text-align: center;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   
   i {
     color: var(--accent);
   }
   
-  .contact-link {
-    color: var(--accent-2);
-    text-decoration: none;
-    font-size: 0.9rem;
-    
-    &:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
+  .credential-id {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: monospace;
   }
 }
 
-.empty-state-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  backdrop-filter: blur(5px);
-  animation: fadeInUp 1.2s ease-out;
+.certificate-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   
-  h3 {
-    color: var(--accent-2);
-    font-weight: 600;
-  }
-  
-  p {
-    color: var(--muted);
+  i {
+    font-size: 0.9rem;
   }
 }
 
@@ -258,35 +327,41 @@
     font-size: 1rem;
   }
   
-  .testimonials-grid {
+  .section-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    
+    i {
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .certificates-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   
-  .testimonial-card {
+  .education-card,
+  .certificate-card {
     padding: 1.5rem;
   }
   
-  .testimonial-content .testimonial-text {
-    font-size: 1rem;
-    padding-right: 1.5rem;
-  }
-  
-  .quote-icon {
-    font-size: 1.5rem;
-  }
-  
-  .testimonial-author .author-info {
-    .author-name {
+  .education-header,
+  .certificate-header {
+    .education-institution,
+    .certificate-institution {
       font-size: 1.1rem;
     }
     
-    .author-position {
-      font-size: 0.95rem;
+    .education-degree,
+    .certificate-name {
+      font-size: 1rem;
     }
-    
-    .author-company {
-      font-size: 0.9rem;
-    }
+  }
+  
+  .certificate-badge {
+    position: static;
+    margin-top: 1rem;
+    justify-content: center;
   }
 }
