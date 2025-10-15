@@ -117,19 +117,6 @@
               <p>{{ study.description }}</p>
             </div>
 
-            <!-- Achievements -->
-            <div class="study-achievements" *ngIf="study.achievements && study.achievements.length > 0">
-              <h5 class="achievements-title">
-                <i class="bi bi-trophy-fill me-2"></i>
-                Logros Académicos
-              </h5>
-              <ul class="achievements-list">
-                <li *ngFor="let achievement of study.achievements">
-                  {{ achievement }}
-                </li>
-              </ul>
-            </div>
-
             <!-- Skills -->
             <div class="study-skills" *ngIf="study.skills && study.skills.length > 0">
               <h5 class="skills-title">
