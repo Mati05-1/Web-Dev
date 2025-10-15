@@ -28,7 +28,7 @@ export class JobsComponent implements OnInit {
     this.jobs = [
       {
         period: '2022 - 2023',
-        company: 'Hospital Veterinario San Rafael',
+        company: 'Hospital Veterinario',
         position: 'Asistente Veterinario',
         description: 'Trabajé en diferentes áreas del hospital veterinario realizando diversas tareas de apoyo al equipo médico y administrativo.',
         responsibilities: [
