@@ -15,21 +15,21 @@ app.use(express.json());
 let experiences = [
   {
     id: 1,
-    company: "Tech Solutions Inc",
-    position: "Frontend Developer",
-    period: "2023 - Presente",
-    description: "Desarrollo de aplicaciones web modernas usando Angular y TypeScript",
-    technologies: ["Angular", "TypeScript", "SCSS", "RxJS"],
-    achievements: ["Mejoré el rendimiento de la app en 40%", "Implementé testing automatizado"]
+    company: "Hospital Veterinario",
+    position: "Asistente Veterinario",
+    period: "2022 - 2023",
+    description: "Trabajé en diferentes áreas del hospital veterinario realizando diversas tareas de apoyo al equipo médico y administrativo.",
+    technologies: ["Sistemas de gestión veterinaria", "Equipos médicos básicos"],
+    achievements: ["Asistencia en consultas veterinarias", "Cuidado y alimentación de animales hospitalizados", "Limpieza y mantenimiento de instalaciones", "Apoyo en procedimientos médicos básicos", "Atención al cliente y gestión de citas", "Inventario de medicamentos y suministros"]
   },
   {
     id: 2,
-    company: "StartupXYZ",
-    position: "Junior Developer",
-    period: "2022 - 2023",
-    description: "Desarrollo full-stack de aplicaciones web",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
-    achievements: ["Lancé 3 features principales", "Reduje bugs en producción en 60%"]
+    company: "Torneo de Tenis Nacional",
+    position: "Recogebolas",
+    period: "2023",
+    description: "Participé como recogebolas en un torneo de tenis nacional, desarrollando habilidades de trabajo en equipo y bajo presión.",
+    technologies: ["Equipos de comunicación", "Sistemas de puntuación"],
+    achievements: ["Recolección rápida y eficiente de pelotas durante los partidos", "Coordinación con otros recogebolas para mantener el ritmo del juego", "Atención a las señales de los árbitros y jugadores", "Mantenimiento del orden y limpieza de la cancha", "Trabajo en equipo bajo condiciones de presión", "Respeto por las reglas y protocolos del torneo"]
   }
 ];
 
