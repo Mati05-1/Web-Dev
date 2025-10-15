@@ -75,58 +75,8 @@
       </div>
     </div>
 
-    <!-- API Experiences List -->
-    <div class="row justify-content-center mb-4" *ngIf="!loading && !error && apiExperiences.length > 0">
-      <div class="col-12 col-lg-10">
-        <div class="jobs-list">
-          <div *ngFor="let experience of apiExperiences; let i = index" 
-               class="job-card"
-               [style.animation-delay]="(i * 0.1) + 's'">
-            
-            <!-- Job Header -->
-            <div class="job-header">
-              <div class="job-period">{{ experience.period }}</div>
-              <div class="job-company">{{ experience.company | reverse }}</div>
-              <div class="job-position">{{ experience.position }}</div>
-            </div>
-
-            <!-- Job Description -->
-            <div class="job-description">
-              <p>{{ experience.description }}</p>
-            </div>
-
-            <!-- Achievements -->
-            <div class="job-responsibilities" *ngIf="experience.achievements && experience.achievements.length > 0">
-              <h5 class="responsibilities-title">
-                <i class="bi bi-trophy-fill me-2"></i>
-                Logros Principales
-              </h5>
-              <ul class="responsibilities-list">
-                <li *ngFor="let achievement of experience.achievements">
-                  {{ achievement }}
-                </li>
-              </ul>
-            </div>
-
-            <!-- Technologies -->
-            <div class="job-technologies" *ngIf="experience.technologies && experience.technologies.length > 0">
-              <h5 class="technologies-title">
-                <i class="bi bi-gear-fill me-2"></i>
-                Tecnologías Utilizadas
-              </h5>
-              <div class="technologies-tags">
-                <span *ngFor="let tech of experience.technologies" class="tech-tag">
-                  {{ tech }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Static Jobs List (Fallback) -->
-    <div class="row justify-content-center" *ngIf="loading || error">
+    <!-- Static Jobs List (Main Display) -->
+    <div class="row justify-content-center" *ngIf="jobs.length > 0">
       <div class="col-12 col-lg-10">
         <div class="jobs-list">
           <div *ngFor="let job of jobs; let i = index" 
