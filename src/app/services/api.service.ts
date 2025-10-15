@@ -145,15 +145,6 @@ export class ApiService {
               description: "Estudiante de Ciencias de la Computación",
               gpa: "3.8",
               courses: ["Algoritmos", "Estructuras de Datos", "Base de Datos", "Desarrollo Web"]
-            },
-            {
-              id: 2,
-              institution: "Colegio Internacional",
-              degree: "Bachillerato en Ciencias",
-              period: "2018 - 2023",
-              description: "Educación secundaria con enfoque en ciencias",
-              gpa: "3.9",
-              courses: ["Matemáticas Avanzadas", "Física", "Química", "Programación"]
             }
           ]);
         })
