@@ -90,40 +90,6 @@ let skills = [
   }
 ];
 
-// Testimonios/Referencias
-let testimonials = [
-  {
-    id: 1,
-    name: "María González",
-    position: "Tech Lead",
-    company: "Tech Solutions Inc",
-    relationship: "Supervisor directo",
-    testimonial: "Matías es un desarrollador excepcional. Su capacidad para resolver problemas complejos y su dedicación al aprendizaje continuo lo hacen un activo invaluable para cualquier equipo.",
-    rating: 5,
-    contact: "maria.gonzalez@techsolutions.com"
-  },
-  {
-    id: 2,
-    name: "Carlos Rodríguez",
-    position: "Senior Developer",
-    company: "StartupXYZ",
-    relationship: "Colega de trabajo",
-    testimonial: "Trabajar con Matías fue una experiencia increíble. Su pasión por el código limpio y su habilidad para aprender nuevas tecnologías rápidamente son impresionantes.",
-    rating: 5,
-    contact: "carlos.rodriguez@startupxyz.com"
-  },
-  {
-    id: 3,
-    name: "Ana Martínez",
-    position: "Profesora",
-    company: "Universidad Francisco Marroquín",
-    relationship: "Profesora universitaria",
-    testimonial: "Matías es uno de los estudiantes más destacados. Su curiosidad intelectual y su capacidad para aplicar conceptos teóricos en proyectos prácticos son excepcionales.",
-    rating: 5,
-    contact: "ana.martinez@ufm.edu"
-  }
-];
-
 // ========================================
 // RUTAS PRINCIPALES
 // ========================================
@@ -135,8 +101,7 @@ app.get('/', (req, res) => {
     endpoints: {
       experiences: '/experiences',
       education: '/education', 
-      skills: '/skills',
-      testimonials: '/testimonials'
+      skills: '/skills'
     }
   });
 });
@@ -393,101 +358,6 @@ app.delete('/skills/:id', (req, res) => {
 });
 
 // ========================================
-// TESTIMONIOS
-// ========================================
-
-// GET /testimonials - Ver todos los testimonios
-app.get('/testimonials', (req, res) => {
-  res.json(testimonials);
-});
-
-// GET /testimonials/:id - Ver un testimonio específico
-app.get('/testimonials/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const testimonial = testimonials.find(t => t.id === id);
-
-  if (!testimonial) {
-    return res.status(404).json({ error: 'Testimonio no encontrado' });
-  }
-
-  res.json(testimonial);
-});
-
-// POST /testimonials - Crear un nuevo testimonio
-app.post('/testimonials', (req, res) => {
-  const { name, position, company, relationship, testimonial, rating, contact } = req.body;
-
-  if (!name || !position || !company || !testimonial) {
-    return res.status(422).json({ 
-      error: 'Los campos "name", "position", "company" y "testimonial" son obligatorios' 
-    });
-  }
-
-  if (rating < 1 || rating > 5) {
-    return res.status(422).json({ 
-      error: 'El rating debe estar entre 1 y 5' 
-    });
-  }
-
-  const newId = Math.max(0, ...testimonials.map(t => t.id)) + 1;
-  const newTestimonial = {
-    id: newId,
-    name,
-    position,
-    company,
-    relationship: relationship || '',
-    testimonial,
-    rating: Number(rating) || 5,
-    contact: contact || ''
-  };
-
-  testimonials.push(newTestimonial);
-  res.status(201).json(newTestimonial);
-});
-
-// PATCH /testimonials/:id - Actualizar un testimonio
-app.patch('/testimonials/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const testimonial = testimonials.find(t => t.id === id);
-
-  if (!testimonial) {
-    return res.status(404).json({ error: 'Testimonio no encontrado' });
-  }
-
-  const { name, position, company, relationship, testimonial: testimonialText, rating, contact } = req.body;
-
-  if (name !== undefined) testimonial.name = name;
-  if (position !== undefined) testimonial.position = position;
-  if (company !== undefined) testimonial.company = company;
-  if (relationship !== undefined) testimonial.relationship = relationship;
-  if (testimonialText !== undefined) testimonial.testimonial = testimonialText;
-  if (rating !== undefined) {
-    if (rating < 1 || rating > 5) {
-      return res.status(422).json({ 
-        error: 'El rating debe estar entre 1 y 5' 
-      });
-    }
-    testimonial.rating = Number(rating);
-  }
-  if (contact !== undefined) testimonial.contact = contact;
-
-  res.json(testimonial);
-});
-
-// DELETE /testimonials/:id - Eliminar un testimonio
-app.delete('/testimonials/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const index = testimonials.findIndex(t => t.id === id);
-
-  if (index === -1) {
-    return res.status(404).json({ error: 'Testimonio no encontrado' });
-  }
-
-  const deletedTestimonial = testimonials.splice(index, 1)[0];
-  res.json(deletedTestimonial);
-});
-
-// ========================================
 // MANEJO DE ERRORES
 // ========================================
 
@@ -519,9 +389,4 @@ app.listen(PORT, () => {
   console.log(`   POST   /skills            - Crear una nueva habilidad`);
   console.log(`   PATCH  /skills/:id        - Actualizar una habilidad`);
   console.log(`   DELETE /skills/:id        - Eliminar una habilidad`);
-  console.log(`   GET    /testimonials      - Ver todos los testimonios`);
-  console.log(`   GET    /testimonials/:id - Ver un testimonio específico`);
-  console.log(`   POST   /testimonials      - Crear un nuevo testimonio`);
-  console.log(`   PATCH  /testimonials/:id - Actualizar un testimonio`);
-  console.log(`   DELETE /testimonials/:id - Eliminar un testimonio`);
 });
