@@ -17,11 +17,9 @@
             <span>{{ contactIcon }}</span> {{ contactButtonText }}
           </button>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#tecnologias">Tecnologías</a></li>
-        <li class="nav-item"><a class="nav-link" href="#lenguajes">Lenguajes</a></li>
-        <li class="nav-item"><a class="nav-link" href="#softskills">Soft Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#educacion">Educación</a></li>
-        <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about">Biografía</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/skills">Habilidades</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/experience/jobs">Experiencia</a></li>
         <li class="nav-item">
           <button (click)="toggleTheme()" class="btn btn-outline-light btn-sm ms-2" title="Cambiar tema">
             <span>{{ themeIcon }}</span>
